@@ -32,12 +32,14 @@ export const PROFILE_DATA = {
     yearsLearning: "2+"
   },
   socials: {
-    github: "https://github.com/",
-    linkedin: "https://linkedin.com/",
-    instagram: "https://instagram.com/",
-    whatsapp: "https://wa.me/6281234567890", // Ganti dengan nomor WhatsApp kamu
-    email: "irazakyelmar@gmail.com"
-  }
+    github: "https://github.com/Zaky24",
+    linkedin: "https://www.linkedin.com/in/ira-zaky-0b6779447?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    instagram: "https://www.instagram.com/zaky__24?vrfl=ZjFianVoNjJxeXFo",
+    whatsapp: "https://wa.me/6289507630763",
+    email: "irazaky24@gmail.com"
+  },
+  // Masukkan kode Access Key dari Web3Forms di bawah ini:
+  web3FormsAccessKey: "cebdbc56-0278-4e81-afe3-f4d741e56272"
 };
 
 /* ==========================================================================
@@ -71,7 +73,7 @@ export const PROJECTS_DATA = [
     ],
     tech: ["Laravel", "Tailwind CSS", "MySQL", "JavaScript"],
     liveUrl: "https://github.com",
-    repoUrl: "https://github.com",
+    repoUrl: "",
     accentColor: "#E05263",
     secondaryColor: "#38BDF8"
   },

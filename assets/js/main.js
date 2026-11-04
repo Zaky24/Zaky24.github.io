@@ -317,8 +317,8 @@ function openProjectDetailModal(proj) {
     const featureList = Array.isArray(proj.features)
       ? proj.features
       : (proj.story && Array.isArray(proj.story.keyFeatures))
-      ? proj.story.keyFeatures
-      : [];
+        ? proj.story.keyFeatures
+        : [];
 
     featuresEl.innerHTML = featureList
       .map(
@@ -514,12 +514,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Contact Form Submission (Direct Email via Mailto + Browser Inbox Log)
+  // Contact Form Submission (Direct Email via Web3Forms with Mailto Fallback)
   const contactForm = document.getElementById("contact-form");
   const contactStatus = document.getElementById("contact-status");
   if (contactForm && contactStatus) {
-    contactForm.addEventListener("submit", (e) => {
+    contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalBtnHTML = submitBtn ? submitBtn.innerHTML : "";
+
       const formData = new FormData(contactForm);
       const name = String(formData.get("name") || "").trim();
       const email = String(formData.get("email") || "").trim();
@@ -530,13 +533,57 @@ document.addEventListener("DOMContentLoaded", () => {
       savedMessages.unshift({ name, email, message, date: new Date().toLocaleString("id-ID") });
       localStorage.setItem("irazaky-inbox", JSON.stringify(savedMessages));
 
-      // Buka aplikasi email pengunjung langsung ke irazakyelmar@gmail.com
+      // Jika ada Access Key Web3Forms
+      if (PROFILE_DATA.web3FormsAccessKey && PROFILE_DATA.web3FormsAccessKey.trim() !== "") {
+        formData.append("access_key", PROFILE_DATA.web3FormsAccessKey.trim());
+        formData.append("subject", `[Portofolio] Pesan Baru dari ${name}`);
+        formData.append("from_name", "Ira Zaky Elmar Portfolio");
+        formData.append("replyto", email);
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = `
+            <svg class="animate-spin w-4 h-4 text-current" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+            <span>Mengirim pesan...</span>
+          `;
+        }
+
+        try {
+          const res = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+          });
+          const result = await res.json();
+
+          if (result.success) {
+            contactStatus.className = "p-3.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--accent-emerald)] text-xs font-semibold text-[var(--accent-emerald)] block";
+            contactStatus.textContent = `Terima kasih ${name}! Pesan kamu sudah berhasil terkirim langsung ke email Ira Zaky Elmar.`;
+            contactForm.reset();
+            return;
+          } else {
+            throw new Error(result.message || "Gagal mengirim pesan");
+          }
+        } catch {
+          contactStatus.className = "p-3.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--accent-primary)] text-xs font-semibold text-[var(--accent-primary)] block";
+          contactStatus.textContent = `Gagal mengirim otomatis via Web3Forms. Membuka aplikasi email kamu...`;
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHTML;
+          }
+        }
+      }
+
+      // Fallback jika belum memasukkan Access Key Web3Forms: buka mailto
       const subject = encodeURIComponent(`Pesan Portofolio dari ${name}`);
       const body = encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`);
       window.location.href = `mailto:${PROFILE_DATA.socials.email}?subject=${subject}&body=${body}`;
 
-      contactStatus.classList.remove("hidden");
-      contactStatus.textContent = `Terima kasih ${name}! Aplikasi email kamu dibuka untuk mengirim pesan langsung ke ${PROFILE_DATA.socials.email}.`;
+      contactStatus.className = "p-3.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--accent-emerald)] text-xs font-semibold text-[var(--accent-emerald)] block";
+      contactStatus.textContent = `Terima kasih ${name}! Aplikasi email dibuka untuk mengirim pesan langsung ke ${PROFILE_DATA.socials.email}.`;
       contactForm.reset();
     });
   }
