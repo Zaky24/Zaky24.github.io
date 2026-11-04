@@ -566,9 +566,10 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             throw new Error(result.message || "Gagal mengirim pesan");
           }
-        } catch {
+        } catch (err) {
           contactStatus.className = "p-3.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--accent-primary)] text-xs font-semibold text-[var(--accent-primary)] block";
-          contactStatus.textContent = `Gagal mengirim otomatis via Web3Forms. Membuka aplikasi email kamu...`;
+          contactStatus.textContent = `Maaf, pesan gagal terkirim: ${err.message || "Koneksi terganggu"}. Silakan hubungi langsung ke WhatsApp atau email ${PROFILE_DATA.socials.email}.`;
+          return;
         } finally {
           if (submitBtn) {
             submitBtn.disabled = false;
