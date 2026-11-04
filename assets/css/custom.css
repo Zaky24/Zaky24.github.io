@@ -1,0 +1,455 @@
+/* ==========================================================================
+   IRA ZAKY ELMAR PORTFOLIO — SOFT CRIMSON RED & HD-2D PIXEL SAKURA WORLD
+   ========================================================================== */
+
+:root {
+  /* Typography */
+  --font-sans: 'Chakra Petch', sans-serif;
+  --font-display: 'Chakra Petch', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-pixel: 'Silkscreen', monospace;
+
+  /* Dark Mode (Default — Midnight Cyber-Crimson) */
+  --bg-ground: #070B14;
+  --bg-elevated: #0E1525;
+  --bg-card: rgba(15, 23, 42, 0.74);
+  --bg-card-solid: #111A2E;
+  --bg-card-hover: rgba(23, 35, 61, 0.88);
+  --bg-pill: rgba(30, 41, 59, 0.78);
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+
+  /* Soft Red / Crimson Rose Accent (Replacing Hot Pink) */
+  --accent-primary: #E05263;
+  --accent-primary-hover: #F06474;
+  --accent-on-primary: #070B14;
+
+  --accent-secondary: #38BDF8;
+  --accent-tertiary: #A855F7;
+  --accent-amber: #F59E0B;
+  --accent-emerald: #10B981;
+
+  --border-subtle: rgba(148, 163, 184, 0.16);
+  --border-highlight: rgba(224, 82, 99, 0.48);
+  --border-cyan: rgba(56, 189, 248, 0.42);
+
+  --shadow-card: 0 16px 36px -10px rgba(2, 6, 23, 0.72), 0 4px 12px -2px rgba(2, 6, 23, 0.5);
+  --shadow-btn: 0 8px 20px -4px rgba(2, 6, 23, 0.62);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme="light"] {
+  /* Light Mode — Daylight Kyoto Soft Crimson */
+  --bg-ground: #FAF7F2;
+  --bg-elevated: #F2ECE1;
+  --bg-card: rgba(255, 255, 255, 0.86);
+  --bg-card-solid: #FFFFFF;
+  --bg-card-hover: rgba(255, 255, 255, 0.96);
+  --bg-pill: rgba(241, 234, 224, 0.92);
+
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+
+  --accent-primary: #C83E4E;
+  --accent-primary: #C83E4E;
+  --accent-primary-hover: #A82E3C;
+  --accent-on-primary: #FFFFFF;
+
+  --accent-secondary: #0284C7;
+  --accent-tertiary: #7E22CE;
+  --accent-amber: #D97706;
+  --accent-emerald: #059669;
+
+  --border-subtle: rgba(51, 65, 85, 0.15);
+  --border-highlight: rgba(200, 62, 78, 0.42);
+  --border-cyan: rgba(2, 132, 199, 0.35);
+
+  --shadow-card: 0 14px 32px -8px rgba(15, 23, 42, 0.1), 0 4px 10px -2px rgba(15, 23, 42, 0.06);
+  --shadow-btn: 0 8px 18px -4px rgba(15, 23, 42, 0.12);
+}
+
+/* ==========================================================================
+   FUNDAMENTALS & BROWSER SURFACES
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-ground);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  caret-color: var(--accent-primary);
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-primary) var(--bg-elevated);
+}
+
+body {
+  background-color: var(--bg-ground);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::selection {
+  background-color: var(--accent-primary);
+  color: var(--accent-on-primary);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-elevated);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 9999px;
+  border: 2px solid var(--bg-elevated);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 3px;
+}
+
+/* Commanding Typographic Scale (Larger Section Titles!) */
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.15rem, 4.8vw, 3.85rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  margin: 0 0 1rem 0;
+}
+
+h2,
+.section-heading-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2.15rem, 3.8vw, 3.1rem) !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0 0 0.85rem 0;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem 0;
+}
+
+.font-pixel-accent {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.02em;
+}
+
+.tabular-nums-data {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle HD-2D Pixel Grid Texture Overlay */
+.hd2d-pixel-grid-overlay {
+  background-image: radial-gradient(var(--border-subtle) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ==========================================================================
+   CUSTOM INTERACTIVE CURSOR FOLLOWER (Disabled Ring, Spark Trail Handled by Canvas)
+   ========================================================================== */
+
+.cursor-ring,
+.cursor-dot {
+  display: none !important;
+}
+
+/* ==========================================================================
+   HERO 3D TILT OBJECT & GFX SHOWCASE
+   ========================================================================== */
+
+.hero-3d-stage {
+  perspective: 1100px;
+}
+
+.hero-3d-card {
+  transform-style: preserve-3d;
+  transition: transform 180ms ease-out;
+  will-change: transform;
+}
+
+.hero-3d-floating-badge {
+  transform: translateZ(32px);
+}
+
+/* ==========================================================================
+   GAME CHARACTER RIM OUTLINE & INSTANT HOVER GLITCH (ABOUT PHOTO)
+   ========================================================================== */
+
+.profile-character-stage {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  height: 410px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  overflow: visible;
+}
+
+/* Game Character Silhouette Base (Clean at rest, Rim outline appears on hover) */
+.profile-character-base {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000000 65%, transparent 98%);
+  mask-image: linear-gradient(to bottom, #000000 65%, transparent 98%);
+  transition: filter 220ms var(--ease-out-expo), transform 220ms var(--ease-out-expo);
+}
+
+/* Saat di-hover: Garis-garis tepi (Rim Outline) muncul seketika */
+.profile-character-stage:hover .profile-character-base {
+  transform: scale(1.02);
+  filter:
+    drop-shadow(2.5px 0 0 var(--accent-primary))
+    drop-shadow(-2.5px 0 0 var(--accent-secondary))
+    drop-shadow(0 -2px 0 var(--accent-primary));
+}
+
+/* Glitch Clone Layers (Langsung aktif instan saat hover) */
+.profile-glitch-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  clip-path: inset(0 0 100% 0);
+  -webkit-mask-image: linear-gradient(to bottom, #000000 65%, transparent 98%);
+  mask-image: linear-gradient(to bottom, #000000 65%, transparent 98%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.profile-character-stage:hover .profile-glitch-red {
+  filter: drop-shadow(3px 0 0 var(--accent-primary));
+  animation: character-glitch-red 1.2s steps(2, end) infinite;
+}
+
+.profile-character-stage:hover .profile-glitch-cyan {
+  filter: drop-shadow(-3px 0 0 var(--accent-secondary));
+  animation: character-glitch-cyan 1.2s steps(2, end) infinite;
+}
+
+/* Glitch instan: langsung bergeser dari frame 0% saat kursor masuk */
+@keyframes character-glitch-red {
+  0% {
+    clip-path: inset(16% 0 62% 0);
+    transform: translate(-4px, 1px);
+  }
+  15% {
+    clip-path: inset(48% 0 28% 0);
+    transform: translate(3px, -1px);
+  }
+  30% {
+    clip-path: inset(72% 0 12% 0);
+    transform: translate(-3px, 2px);
+  }
+  45% {
+    clip-path: inset(24% 0 52% 0);
+    transform: translate(4px, 0);
+  }
+  60%, 100% {
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes character-glitch-cyan {
+  0% {
+    clip-path: inset(36% 0 42% 0);
+    transform: translate(4px, -1px);
+  }
+  15% {
+    clip-path: inset(12% 0 68% 0);
+    transform: translate(-3px, 2px);
+  }
+  30% {
+    clip-path: inset(58% 0 22% 0);
+    transform: translate(3px, -1px);
+  }
+  45% {
+    clip-path: inset(82% 0 6% 0);
+    transform: translate(-2px, 0);
+  }
+  60%, 100% {
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0, 0);
+  }
+}
+
+/* Soft Cloud / Mist Aura di bawah foto */
+.profile-cloud-mist {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 90px;
+  background: radial-gradient(ellipse at center bottom, rgba(224, 82, 99, 0.28) 0%, rgba(56, 189, 248, 0.16) 45%, transparent 75%);
+  filter: blur(16px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   GLASSMORPHISM CARDS, TABS & BUTTONS
+   ========================================================================== */
+
+.surface-card {
+  background-color: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  transition: transform 260ms var(--ease-out-expo), border-color 260ms var(--ease-out-expo), background-color 260ms var(--ease-out-expo);
+}
+
+.surface-card-interactive:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-highlight);
+  background-color: var(--bg-card-hover);
+}
+
+.btn-primary-modern {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 46px;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--accent-primary);
+  color: var(--accent-on-primary);
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-btn);
+  transition: transform 200ms var(--ease-out-expo), background-color 200ms var(--ease-out-expo);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary-modern:hover {
+  transform: translateY(-2px);
+  background-color: var(--accent-primary-hover);
+}
+
+.btn-secondary-modern {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 46px;
+  padding: 0.75rem 1.4rem;
+  background-color: var(--bg-pill);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  transition: transform 200ms var(--ease-out-expo), border-color 200ms var(--ease-out-expo), background-color 200ms var(--ease-out-expo);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-secondary-modern:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-secondary);
+  background-color: var(--bg-card-hover);
+}
+
+/* Typewriter Blinking Cursor */
+.typewriter-caret {
+  display: inline-block;
+  width: 3px;
+  height: 1.1em;
+  background-color: var(--accent-primary);
+  vertical-align: middle;
+  margin-left: 4px;
+  animation: blink-caret 850ms steps(2, start) infinite;
+}
+
+@keyframes blink-caret {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Portfolio 3-Tab Switcher */
+.showcase-tab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.9rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: all 220ms var(--ease-out-expo);
+  cursor: pointer;
+}
+
+.showcase-tab-btn:hover {
+  color: var(--text-primary);
+  background-color: rgba(148, 163, 184, 0.08);
+}
+
+.showcase-tab-btn[aria-selected="true"] {
+  background-color: var(--accent-primary);
+  color: var(--accent-on-primary);
+  box-shadow: var(--shadow-btn);
+}

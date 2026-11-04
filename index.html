@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ira Zaky Elmar — Software Engineer, Web &amp; Fullstack Developer</title>
+  <meta name="description"
+    content="Portofolio resmi Ira Zaky Elmar — Mahasiswa Politeknik LP3I, Software Engineer, Web Developer, dan Fullstack Developer. Jelajahi proyek, sertifikat, dan tech stack." />
+  <meta name="theme-color" content="#070B14" />
+
+  <!-- OpenGraph SEO -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ira Zaky Elmar — Portfolio | Software Engineer &amp; Fullstack Developer" />
+  <meta property="og:description"
+    content="Transforming ideas into digital experiences. Lihat proyek web, sertifikat, dan keahlian teknologi Ira Zaky Elmar." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Silkscreen:wght@400;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="./assets/css/custom.css" />
+
+  <!-- JSON-LD Person Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ira Zaky Elmar",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "Politeknik LP3I"
+    },
+    "jobTitle": ["Software Engineer", "Web Developer", "Fullstack Developer"]
+  }
+  </script>
+</head>
+
+<body class="relative min-h-screen antialiased hd2d-pixel-grid-overlay">
+
+  <!-- Full-Viewport Smooth HD-2D Pixel Soft-Crimson Sakura & Spark Trail Canvas -->
+  <canvas id="sakura-canvas" class="fixed inset-0 pointer-events-none z-0" aria-hidden="true"></canvas>
+
+  <!-- ========================================================================
+       STICKY NAVBAR
+       ======================================================================== -->
+  <header class="sticky top-0 z-40 bg-[var(--bg-card)] backdrop-blur-md border-b border-[var(--border-subtle)]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <!-- Personal Brand Logo -->
+      <a href="#home"
+        class="flex items-center gap-2.5 text-lg sm:text-xl font-bold tracking-tight text-[var(--text-primary)] no-underline">
+        <span>Ira Zaky <span class="text-[var(--accent-primary)]">Elmar</span></span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-7" aria-label="Main Navigation">
+        <a href="#home"
+          class="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] no-underline">Home</a>
+        <a href="#about"
+          class="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] no-underline">About</a>
+        <a href="#portfolio"
+          class="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] no-underline">Portfolio</a>
+        <a href="#contact"
+          class="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] no-underline">Contact</a>
+        <a href="#game"
+          class="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] no-underline">Game</a>
+      </nav>
+
+      <!-- Dark / Light Mode Toggle + Mobile Menu Button -->
+      <div class="flex items-center gap-2.5">
+        <button id="theme-toggle-btn" type="button"
+          class="inline-flex items-center gap-2 min-h-[40px] px-3.5 py-1.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] hover:border-[var(--accent-secondary)] text-xs font-semibold text-[var(--text-primary)] cursor-pointer transition-colors"
+          aria-label="Toggle Dark or Light Mode">
+          <svg class="w-4 h-4 text-[var(--accent-amber)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+          <span id="theme-label">Dark</span>
+        </button>
+
+        <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu-panel"
+          class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] text-[var(--text-primary)]"
+          aria-label="Buka menu navigasi">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu-panel"
+      class="hidden md:hidden border-t border-[var(--border-subtle)] bg-[var(--bg-elevated)] px-4 py-3 space-y-1">
+      <a href="#home"
+        class="block py-2.5 px-3 rounded-lg text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-pill)] no-underline">Home</a>
+      <a href="#about"
+        class="block py-2.5 px-3 rounded-lg text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-pill)] no-underline">About</a>
+      <a href="#portfolio"
+        class="block py-2.5 px-3 rounded-lg text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-pill)] no-underline">Portfolio</a>
+      <a href="#contact"
+        class="block py-2.5 px-3 rounded-lg text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-pill)] no-underline">Contact</a>
+      <a href="#game"
+        class="block py-2.5 px-3 rounded-lg text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-pill)] no-underline">Game
+        (Coming Soon)</a>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+    <!-- ======================================================================
+         1. HERO SECTION (PERSONAL INTRO + TYPEWRITER + 3D TILT GFX SHOWCASE)
+         ====================================================================== -->
+    <section id="home" class="min-h-[calc(100vh-4rem)] flex items-center py-14 lg:py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+          <!-- Left Column: Personal Introduction & Typewriter -->
+          <div class="lg:col-span-7 space-y-6">
+            <div
+              class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-pill)] border border-[var(--border-highlight)]">
+              <span class="tabular-nums-data text-xs font-semibold text-[var(--text-primary)]">
+                Ready to Innovate
+              </span>
+            </div>
+
+            <div class="space-y-2">
+              <h1>
+                Hi, I'm <span class="text-[var(--accent-primary)]">Ira Zaky Elmar</span>
+              </h1>
+
+              <!-- Typewriter Line: Software Engineer | Web Developer | Fullstack Developer -->
+              <div class="flex items-center flex-wrap gap-2 min-h-[2.5rem]">
+                <span id="typewriter-role"
+                  class="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--accent-secondary)]"
+                  aria-live="polite">Software Engineer</span><span class="typewriter-caret" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <p class="text-base sm:text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+              Menciptakan website dan aplikasi web yang inovatif, fungsional, dan user-friendly. Berfokus pada
+              pengembangan solusi digital modern baik di sisi Frontend maupun Fullstack Development.
+            </p>
+
+            <!-- Action Buttons (Direct My-CV.pdf Download) -->
+            <div class="flex flex-wrap items-center gap-3.5 pt-1">
+              <a href="./My-CV.pdf" download="CV-Ira-Zaky-Elmar.pdf" target="_blank" rel="noopener noreferrer"
+                class="btn-primary-modern">
+                <svg class="w-4 h-4 text-[var(--accent-on-primary)]" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                <span>Download CV</span>
+              </a>
+
+              <a href="#portfolio" class="btn-secondary-modern">
+                <span>Projects</span>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+
+              <a href="#contact" class="btn-secondary-modern">
+                <span>Contact</span>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </a>
+
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive 3D Perspective GFX / GIF Showcase (heroSection.gif) -->
+          <div id="hero-3d-stage" class="lg:col-span-5 hero-3d-stage flex justify-center">
+            <div id="hero-3d-card" class="surface-card hero-3d-card w-full max-w-md space-y-4">
+              <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-[var(--accent-primary)]"></span>
+                  <span class="w-3 h-3 rounded-full bg-[var(--accent-amber)]"></span>
+                  <span class="w-3 h-3 rounded-full bg-[var(--accent-emerald)]"></span>
+                </div>
+                <span class="tabular-nums-data text-xs text-[var(--text-muted)]">WORKSPACE // HD-2D GFX</span>
+              </div>
+
+              <div class="overflow-hidden rounded-xl">
+                <img src="./heroSection.gif" alt="Ira Zaky Elmar Interactive Developer GFX"
+                  class="w-full h-auto object-cover block" />
+              </div>
+
+              <div class="hero-3d-floating-badge flex items-center justify-between text-xs tabular-nums-data pt-1">
+                <span class="text-[var(--text-secondary)] font-semibold">IRA ZAKY ELMAR</span>
+                <span class="text-[var(--accent-secondary)]">FULLSTACK &amp; WEB DEV</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. ABOUT ME SECTION (BIO + MY-CV.PDF + TRANSPARENT CUTOUT PHOTO WITH RIM & GLITCH)
+         ====================================================================== -->
+    <section id="about" class="py-20 lg:py-24 border-t border-[var(--border-subtle)]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+        <!-- Section Header (Larger Commanding Size) -->
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <h2 class="section-heading-xl">About Me</h2>
+          <p class="text-base sm:text-lg text-[var(--text-secondary)]">
+            Transforming ideas into functional and memorable digital experiences
+          </p>
+        </div>
+
+        <!-- 2-Column Bio + Cutout Character Photo -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <!-- Left: Personal Story & Download CV -->
+          <div class="lg:col-span-7 space-y-5">
+            <h3 class="text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+              Hello, I'm <span class="text-[var(--accent-primary)]">Ira Zaky Elmar</span>
+            </h3>
+
+            <p class="text-base text-[var(--text-secondary)] leading-relaxed">
+              Saya adalah seorang mahasiswa aktif di <strong>Politeknik LP3I</strong> (sedang menempuh studi) yang
+              memiliki antusiasme tinggi dalam dunia pengembangan perangkat lunak, khususnya sebagai <strong>Software
+                Engineer</strong>, <strong>Web Developer</strong>, dan <strong>Fullstack Developer</strong>.
+            </p>
+
+            <p class="text-base text-[var(--text-secondary)] leading-relaxed">
+              Saya senang mempelajari teknologi web modern, membangun tampilan aplikasi yang responsif dengan Tailwind
+              CSS, serta merancang sistem backend dan database yang terstruktur. Bagi saya, setiap baris kode adalah
+              kesempatan untuk menghadirkan solusi digital yang cepat, rapi, dan bermanfaat bagi pengguna.
+            </p>
+
+            <!-- Quote Box -->
+            <blockquote
+              class="p-4 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)] text-sm italic text-[var(--text-secondary)]">
+              "Leveraging modern web technology and continuous learning to craft clean, impactful digital solutions."
+            </blockquote>
+
+            <!-- Action Buttons: Download My-CV.pdf + View Projects -->
+            <div class="flex flex-wrap items-center gap-3.5 pt-2">
+              <a href="./My-CV.pdf" download="CV-Ira-Zaky-Elmar.pdf" target="_blank" rel="noopener noreferrer"
+                class="btn-primary-modern">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="12" y1="18" x2="12" y2="12" />
+                  <polyline points="9 15 12 18 15 15" />
+                </svg>
+                <span>Download CV</span>
+              </a>
+
+              <a href="#portfolio" class="btn-secondary-modern">
+                <svg class="w-4 h-4 text-[var(--accent-secondary)]" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                </svg>
+                <span>View Projects</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Transparent Cutout Photo with Game Rim Outline + Instant Hover Glitch + Bottom Cloud Mist -->
+          <div class="lg:col-span-5 flex justify-center items-center">
+            <div class="profile-character-stage" title="Ira Zaky Elmar">
+              <img src="./assets/img/fotoProfile-nobg.png" alt="Ira Zaky Elmar" class="profile-character-base" />
+              <img src="./assets/img/fotoProfile-nobg.png" alt="" aria-hidden="true"
+                class="profile-glitch-layer profile-glitch-red" />
+              <img src="./assets/img/fotoProfile-nobg.png" alt="" aria-hidden="true"
+                class="profile-glitch-layer profile-glitch-cyan" />
+              <div class="profile-cloud-mist" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Summary Metric Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+          <button type="button" data-jump-tab="panel-projects"
+            class="surface-card surface-card-interactive text-left w-full flex flex-col justify-between gap-4 cursor-pointer">
+            <div class="flex items-center justify-between w-full">
+              <span class="text-[var(--accent-primary)]">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                </svg>
+              </span>
+              <span class="tabular-nums-data text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">6</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-[var(--text-primary)]">Total Projects</h3>
+              <p class="text-xs text-[var(--text-secondary)]">Innovative web &amp; fullstack solutions crafted</p>
+            </div>
+          </button>
+
+          <button type="button" data-jump-tab="panel-certificates"
+            class="surface-card surface-card-interactive text-left w-full flex flex-col justify-between gap-4 cursor-pointer">
+            <div class="flex items-center justify-between w-full">
+              <span class="text-[var(--accent-secondary)]">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <circle cx="12" cy="8" r="6" />
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                </svg>
+              </span>
+              <span class="tabular-nums-data text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">6</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-[var(--text-primary)]">Certificates</h3>
+              <p class="text-xs text-[var(--text-secondary)]">Professional skills &amp; courses validated</p>
+            </div>
+          </button>
+
+          <button type="button" data-jump-tab="panel-techstack"
+            class="surface-card surface-card-interactive text-left w-full flex flex-col justify-between gap-4 cursor-pointer">
+            <div class="flex items-center justify-between w-full">
+              <span class="text-[var(--accent-amber)]">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </span>
+              <span class="tabular-nums-data text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)]">2+</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-[var(--text-primary)]">Years in IT</h3>
+              <p class="text-xs text-[var(--text-secondary)]">Menjalani dunia IT &amp; eksplorasi web development</p>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. PORTFOLIO SHOWCASE SECTION (PROJECTS, CERTIFICATES, TECH STACK)
+         ====================================================================== -->
+    <section id="portfolio" class="py-20 lg:py-24 border-t border-[var(--border-subtle)]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <h2 class="section-heading-xl">Portfolio Showcase</h2>
+          <p class="text-base sm:text-lg text-[var(--text-secondary)]">
+            Explore my journey through projects, certifications, and technical expertise. Klik tombol
+            <strong>Details</strong> pada proyek untuk membaca latar belakang, tujuan, dan cerita pembuatannya.
+          </p>
+        </div>
+
+        <!-- Full-Width 3-Tab Pill Switcher -->
+        <div role="tablist" aria-label="Portfolio Showcase Tabs"
+          class="grid grid-cols-3 gap-2 p-2 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)]">
+          <button type="button" role="tab" id="tab-btn-projects" aria-selected="true" aria-controls="panel-projects"
+            class="showcase-tab-btn">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true">
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
+            <span>Projects</span>
+          </button>
+
+          <button type="button" role="tab" id="tab-btn-certificates" aria-selected="false"
+            aria-controls="panel-certificates" class="showcase-tab-btn">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true">
+              <circle cx="12" cy="8" r="6" />
+              <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+            </svg>
+            <span>Certificates</span>
+          </button>
+
+          <button type="button" role="tab" id="tab-btn-techstack" aria-selected="false" aria-controls="panel-techstack"
+            class="showcase-tab-btn">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true">
+              <polygon points="12 2 2 7 12 12 22 7 12 2" />
+              <polyline points="2 17 12 22 22 17" />
+              <polyline points="2 12 12 17 22 12" />
+            </svg>
+            <span>Tech Stack</span>
+          </button>
+        </div>
+
+        <!-- Panel 1: Projects Grid -->
+        <div id="panel-projects" role="tabpanel" aria-labelledby="tab-btn-projects" class="showcase-panel">
+          <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+
+        <!-- Panel 2: Certificates Grid -->
+        <div id="panel-certificates" role="tabpanel" aria-labelledby="tab-btn-certificates"
+          class="showcase-panel hidden">
+          <div id="certificates-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+
+        <!-- Panel 3: Tech Stack Grid -->
+        <div id="panel-techstack" role="tabpanel" aria-labelledby="tab-btn-techstack" class="showcase-panel hidden">
+          <div id="techstack-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. CONTACT SECTION (GET IN TOUCH + CONNECT WITH ME)
+         ====================================================================== -->
+    <section id="contact" class="py-20 lg:py-24 border-t border-[var(--border-subtle)]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <h2 class="section-heading-xl">Contact Me</h2>
+          <p class="text-base sm:text-lg text-[var(--text-secondary)]">
+            Punya pertanyaan, tawaran kolaborasi proyek, atau diskusi seputar web development? Kirimkan pesan di bawah
+            ini.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Left: Contact Form -->
+          <form id="contact-form" class="lg:col-span-7 surface-card space-y-5">
+            <h3 class="text-xl font-bold text-[var(--text-primary)]">Get in Touch</h3>
+
+            <div class="space-y-1.5">
+              <label for="contact-name" class="block text-xs font-semibold text-[var(--text-secondary)]">Nama
+                Lengkap</label>
+              <input id="contact-name" name="name" type="text" required placeholder="Masukkan nama kamu"
+                class="w-full min-h-[46px] px-4 py-2.5 rounded-xl bg-[var(--bg-ground)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-primary)]" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="contact-email" class="block text-xs font-semibold text-[var(--text-secondary)]">Email</label>
+              <input id="contact-email" name="email" type="email" required placeholder="nama@email.com"
+                class="w-full min-h-[46px] px-4 py-2.5 rounded-xl bg-[var(--bg-ground)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-primary)]" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="contact-message"
+                class="block text-xs font-semibold text-[var(--text-secondary)]">Pesan</label>
+              <textarea id="contact-message" name="message" rows="4" required
+                placeholder="Tulis pesan atau detail proyek yang ingin didiskusikan..."
+                class="w-full p-4 rounded-xl bg-[var(--bg-ground)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-primary)]"></textarea>
+            </div>
+
+            <div id="contact-status" role="status" aria-live="polite"
+              class="hidden p-3.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--accent-emerald)] text-xs font-semibold text-[var(--accent-emerald)]">
+            </div>
+
+            <button type="submit" class="btn-primary-modern w-full">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+              <span>Send Message</span>
+            </button>
+          </form>
+
+          <!-- Right: Connect With Me -->
+          <div class="lg:col-span-5 surface-card space-y-4">
+            <h3 class="text-xl font-bold text-[var(--text-primary)]">Connect With Me</h3>
+            <p class="text-sm text-[var(--text-secondary)]">
+              Temukan dan terhubung langsung dengan Ira Zaky Elmar melalui kanal berikut:
+            </p>
+
+            <div class="divide-y divide-[var(--border-subtle)] pt-1">
+              <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
+                class="flex items-center justify-between py-3.5 hover:text-[var(--accent-emerald)] no-underline transition-colors">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-[var(--accent-emerald)]" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                  </svg>
+                  <div>
+                    <div class="text-sm font-bold text-[var(--text-primary)]">WhatsApp</div>
+                    <div class="text-xs text-[var(--text-muted)]">Kirim pesan WhatsApp langsung</div>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-[var(--accent-emerald)]">&rarr;</span>
+              </a>
+
+              <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer"
+                class="flex items-center justify-between py-3.5 hover:text-[var(--accent-secondary)] no-underline transition-colors">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-[var(--accent-secondary)]" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                  <div>
+                    <div class="text-sm font-bold text-[var(--text-primary)]">Let's Connect</div>
+                    <div class="text-xs text-[var(--text-muted)]">on LinkedIn — Ira Zaky Elmar</div>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-[var(--accent-secondary)]">&rarr;</span>
+              </a>
+
+              <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer"
+                class="flex items-center justify-between py-3.5 hover:text-[var(--accent-primary)] no-underline transition-colors">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-[var(--accent-primary)]" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                  <div>
+                    <div class="text-sm font-bold text-[var(--text-primary)]">Instagram</div>
+                    <div class="text-xs text-[var(--text-muted)]">@irazakyelmar</div>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-[var(--accent-primary)]">&rarr;</span>
+              </a>
+
+              <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
+                class="flex items-center justify-between py-3.5 hover:text-[var(--accent-secondary)] no-underline transition-colors">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-[var(--text-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" aria-hidden="true">
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                  </svg>
+                  <div>
+                    <div class="text-sm font-bold text-[var(--text-primary)]">GitHub</div>
+                    <div class="text-xs text-[var(--text-muted)]">Explore my repositories</div>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-[var(--accent-secondary)]">&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. MINI-GAME SECTION AT THE BOTTOM (COMING SOON PLACEHOLDER)
+         ====================================================================== -->
+    <section id="game" class="py-16 border-t border-[var(--border-subtle)]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="surface-card flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-2 text-center md:text-left">
+            <h3 class="text-xl sm:text-2xl font-bold text-[var(--text-primary)]">
+              Interactive Mini-Game Zone
+            </h3>
+            <p class="text-sm text-[var(--text-secondary)] max-w-xl">
+              Area mini-game interaktif sedang dalam tahap persiapan dan akan segera hadir di bagian ini.
+            </p>
+          </div>
+
+          <div class="shrink-0 flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-amber)]"></span>
+            <span class="font-pixel-accent text-xs text-[var(--accent-amber)]">
+              COMING SOON · STAGE 01
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="relative z-10 border-t border-[var(--border-subtle)] py-8 bg-[var(--bg-card)]">
+    <div
+      class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--text-muted)]">
+      <div>
+        &copy; 2026 <strong>Ira Zaky Elmar</strong>. All Rights Reserved.
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#home" class="hover:text-[var(--accent-primary)] no-underline">Back to Top &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       PROJECT STORY & CASE STUDY POPUP MODAL
+       ======================================================================== -->
+  <div id="project-detail-modal" role="dialog" aria-modal="true" aria-labelledby="proj-modal-title"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md overflow-y-auto">
+    <div class="surface-card max-w-2xl w-full max-h-[90vh] overflow-y-auto space-y-6 my-auto">
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
+        <div>
+          <p id="proj-modal-meta" class="tabular-nums-data text-xs font-semibold text-[var(--accent-secondary)] mb-1">
+            Category · Timeline
+          </p>
+          <h3 id="proj-modal-title" class="text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+            Project Title
+          </h3>
+        </div>
+        <button id="proj-modal-close" type="button"
+          class="px-3.5 py-2 rounded-xl bg-[var(--bg-pill)] hover:bg-[var(--accent-primary)] hover:text-[var(--accent-on-primary)] text-xs font-bold text-[var(--text-primary)] cursor-pointer transition-colors shrink-0">
+          Tutup [ESC]
+        </button>
+      </div>
+
+      <!-- Project Preview Banner -->
+      <div id="proj-modal-banner"
+        class="h-48 sm:h-56 rounded-xl overflow-hidden border border-[var(--border-subtle)] bg-[#0B1120]"></div>
+
+      <!-- Cerita / Overview Proyek (Mudah diisi satu teks cerita lengkap) -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-primary)] font-pixel-accent">
+          Cerita &amp; Perjalanan Proyek
+        </h4>
+        <p id="proj-modal-story" class="text-sm text-[var(--text-secondary)] leading-relaxed whitespace-pre-line"></p>
+      </div>
+
+      <!-- Fitur Utama -->
+      <div class="space-y-2.5 pt-2 border-t border-[var(--border-subtle)]">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] font-pixel-accent">
+          Fitur Utama
+        </h4>
+        <ul id="proj-modal-features" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></ul>
+      </div>
+
+      <!-- Tech Stack & Action Links -->
+      <div
+        class="pt-4 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div id="proj-modal-tech" class="flex flex-wrap gap-1.5"></div>
+
+        <div class="flex items-center gap-3 shrink-0">
+          <a id="proj-modal-live" href="https://github.com" target="_blank" rel="noopener noreferrer"
+            class="btn-primary-modern text-sm py-2 px-4 min-h-[40px]">
+            <span>Live Demo</span>
+          </a>
+          <a id="proj-modal-repo" href="https://github.com" target="_blank" rel="noopener noreferrer"
+            class="btn-secondary-modern text-sm py-2 px-4 min-h-[40px]">
+            <span>Source Code</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       CERTIFICATE PREVIEW MODAL
+       ======================================================================== -->
+  <div id="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="surface-card max-w-lg w-full space-y-4">
+      <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3">
+        <h3 id="cert-modal-title" class="text-lg font-bold text-[var(--text-primary)]">Certificate Preview</h3>
+        <button id="cert-modal-close" type="button"
+          class="px-3 py-1.5 rounded-lg bg-[var(--bg-pill)] text-xs font-semibold text-[var(--text-primary)] cursor-pointer">
+          Tutup [ESC]
+        </button>
+      </div>
+      <div id="cert-modal-preview" class="rounded-xl overflow-hidden border border-[var(--border-subtle)]"></div>
+      <p id="cert-modal-issuer" class="tabular-nums-data text-xs text-[var(--text-secondary)]"></p>
+    </div>
+  </div>
+
+  <script type="module" src="./assets/js/main.js"></script>
+</body>
+
+</html>
