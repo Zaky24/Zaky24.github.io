@@ -205,20 +205,20 @@ export const PROJECTS_DATA = [
 
 export const CERTIFICATES_DATA = [
   {
-    id: "cert-6",
-    title: "Junior Office Operator",
-    issuer: "BNSP",
-    date: "2025",
-    image: "assets/img/sertifikat/juniorOfficeOperator.png",
-    badgeColor: "#E05263"
-  },
-  {
     id: "cert-2",
     title: "Belajar Membuat Aplikasi Back-End & REST API",
     issuer: "Dicoding Indonesia",
     date: "2025",
     image: "",
     badgeColor: ""
+  },
+  {
+    id: "cert-6",
+    title: "Junior Office Operator",
+    issuer: "BNSP",
+    date: "2025",
+    image: "assets/img/sertifikat/juniorOfficeOperator.png",
+    badgeColor: "#E05263"
   },
   {
     id: "cert-3",
