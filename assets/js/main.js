@@ -310,6 +310,22 @@ function renderPortfolioShowcase() {
 }
 
 /* ==========================================================================
+   RENDER SUMMARY STATS (PROJECTS COUNT, CERTIFICATES COUNT, YEARS IN IT)
+   ========================================================================== */
+function renderSummaryStats() {
+  const stats = PROFILE_DATA.stats;
+  if (!stats) return;
+
+  const projectsCountEl = document.getElementById("stat-projects-count");
+  const certsCountEl = document.getElementById("stat-certificates-count");
+  const yearsLearningEl = document.getElementById("stat-years-learning");
+
+  if (projectsCountEl) projectsCountEl.textContent = stats.projectsCount;
+  if (certsCountEl) certsCountEl.textContent = stats.certificatesCount;
+  if (yearsLearningEl) yearsLearningEl.textContent = stats.yearsLearning;
+}
+
+/* ==========================================================================
    PROJECT DETAIL POPUP MODAL (CERITA PERJALANAN, SECTIONS TAMBAHAN & FITUR)
    ========================================================================== */
 function openProjectDetailModal(proj) {
@@ -465,7 +481,20 @@ function openCertModal(cert) {
   if (!modal) return;
   title.textContent = cert.title;
   issuer.textContent = `${cert.issuer} · Diterbitkan ${cert.date}`;
-  preview.innerHTML = renderCertificateThumbnail(cert);
+  if (cert.image && cert.image.trim() !== "") {
+    preview.innerHTML = `
+      <div class="flex items-center justify-center bg-[#070B14]/80 rounded-xl p-2 max-h-[70vh] overflow-auto">
+        <img
+          src="${cert.image}"
+          alt="${cert.title}"
+          class="max-w-full max-h-[66vh] w-auto h-auto object-contain rounded-lg shadow-lg"
+          loading="lazy"
+        />
+      </div>
+    `;
+  } else {
+    preview.innerHTML = renderCertificateThumbnail(cert);
+  }
 
   modal.classList.remove("hidden");
   modal.classList.add("flex");
@@ -489,6 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initInteractiveCursorAndTilt();
   initTypewriter();
   renderPortfolioShowcase();
+  renderSummaryStats();
 
   // Theme Toggle (Dark / Light)
   const themeBtn = document.getElementById("theme-toggle-btn");
