@@ -71,13 +71,13 @@ export const PROJECTS_DATA = [
     timeline: "2024",
     image: "assets/img/project/BEM.jpeg",
     description:
-      "Web penyampaian informasi yang resmi di lingkungan civitas akademika Politeknik LP3I kampus Padang dan sekitarnya .",
+      "Web penyampaian informasi resmi di lingkungan civitas akademika Politeknik LP3I Kampus Padang dan sekitarnya.",
     story:
-      "Proyek ini saya buat berawal dari keinginan bahwa organiasi kami aktif dalam kegiatan sosialisasi, organisasi, memajukan dan meningkatkan SDM mahasiswa dengan Unit Kegiatan Mahasiswa, intinya website ini awalnya untuk branding dan sarana untuk menyampaikan informasi",
+      "Proyek ini saya buat berawal dari keinginan bahwa organisasi kami aktif dalam kegiatan sosialisasi, keorganisasian, serta memajukan dan meningkatkan SDM mahasiswa bersama Unit Kegiatan Mahasiswa. Website ini dirancang sebagai pusat branding organisasi sekaligus sarana resmi penyampaian informasi.",
     sections: [
       {
         title: "Tantangan & Solusi",
-        content: "pada saat pengembangan website ini saya masih lagi belajar dan menjadikan project website ini menjadi prakter belajar mandiri saya, dan akhirnya saya bisa mempelajari dasar-dasar dari pemrograman, terkhususnya bahasa PHP, dan di fasilitasi oleh kampus hostingannya. karena difasilitasi oleh kampus, untuk aksesnya terbatas dan ketat, akibatnya saya sering menemui operator IT untuk memperbaiki bug dari web yang dibuat, untuk mengatasi itu saya menyelesaikan semua yang di perbaiki agar tidak selalu merepotkan operator IT kampus"
+        content: "Pada saat pengembangan website ini, saya menjadikannya sebagai praktik belajar mandiri hingga berhasil menguasai fondasi pemrograman web, khususnya bahasa PHP dan pengelolaan database MySQL yang difasilitasi hosting kampus. Karena akses server kampus yang ketat, awalnya saya sering berkoordinasi dengan operator IT kampus untuk perbaikan bug. Sebagai solusi, saya melakukan pengujian dan debugging menyeluruh secara lokal sebelum deployment agar sistem berjalan stabil tanpa merepotkan operator IT kampus."
       }
     ],
     tech: ["PHP", "CSS", "MySQL", "JavaScript"],
@@ -88,29 +88,29 @@ export const PROJECTS_DATA = [
   },
   {
     id: "proj-2",
-    title: "E-Voting",
+    title: "E-Voting BEM LP3I",
     category: "Laravel Framework",
     timeline: "2025",
     image: "assets/img/project/evoting.png",
     description:
-      "Web mempermudah dan mengurangi permasalahan waktu dan kertas dalam pemilihan calon Ketua Organisasi Badan Eksekutif Mahasiswa di lingkungan kampus Politeknik LP3I Padang",
+      "Sistem E-Voting berbasis web untuk mempermudah serta menghemat waktu dan kertas dalam pemilihan Ketua Badan Eksekutif Mahasiswa di Politeknik LP3I Padang.",
     story:
-      "Proyek ini berawal dari kebutuhan praktis di lingkungan kampus Politeknik LP3I untuk mempermudah mahasiswa memilih kandidat, dan kendala waktu yang sangat singkat untuk melakukan pemilihan ketua Organisasi Badan Eksekutif Mahasiswa. Akhirnya saya selaku Menteri KOMINFO pada saat itu di amatkan untuk membuat website yang bisa mengatasi masalah tersebut dalam waktu ± 10 hari",
+      "Proyek ini berawal dari kebutuhan nyata di lingkungan kampus Politeknik LP3I Padang untuk mempermudah mahasiswa dalam memilih kandidat secara digital, mengingat keterbatasan waktu jika dilakukan secara manual. Selaku Menteri KOMINFO BEM pada saat itu, saya diamanahkan untuk merancang dan menyelesaikan sistem E-Voting ini dalam waktu singkat (± 10 hari).",
     sections: [
       {
-        title: "Tantangan Solusi",
-        content: "Karena di kasih waktu yang sangat singkat, saya manajemen waktu dengan sebaik mungkin antara perkuliahan dan pengerjaan project ini, dan mencari referensi sistem E-Voting yang beredar di internet dan memodifikasi nya sesuai dengan kebutuhan. akhirnya sistem E-Voting yang telah di buat efisien dalam menghemat waktu dan kertas"
+        title: "Tantangan & Solusi",
+        content: "Dengan tenggat waktu pengerjaan yang sangat singkat di tengah padatnya jadwal perkuliahan, saya menerapkan manajemen waktu yang ketat serta mengadaptasi dan memodifikasi arsitektur sistem E-Voting berbasis Laravel sesuai kebutuhan pemilihan kampus. Hasilnya, sistem E-Voting ini sukses digunakan secara efisien, transparan, serta menghemat waktu dan penggunaan kertas."
       }
     ],
     features: [
-      "Dashboard CRUD kandidat (visi-misi masing-masing kandidat, foto dan nama)",
-      "Dashboard CRUD mahasiswa (Pemilih)",
-      "Card kandidat",
-      "Dashboard hasil voting",
-      "Dan masih banyak lagi fitur yang ada di website ini"
+      "Dashboard CRUD kandidat (visi-misi, foto, dan profil kandidat)",
+      "Dashboard CRUD manajemen data mahasiswa (pemilih tetap)",
+      "Antarmuka kartu pemilihan kandidat yang mudah digunakan",
+      "Dashboard perhitungan suara (real-count) hasil voting",
+      "Validasi hak pilih satu akun satu suara (one vote per student)"
     ],
     tech: ["Laravel", "CSS", "MySQL", "JavaScript"],
-    liveUrl: "evotingbem.plp.ac.id",
+    liveUrl: "https://evotingbem.plp.ac.id",
     repoUrl: "",
     accentColor: "#E05263",
     secondaryColor: "#38BDF8"

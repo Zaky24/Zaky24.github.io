@@ -9,6 +9,14 @@ import { initSakuraCanvas } from "./sakura-canvas.js?v=1.5";
 /* ==========================================================================
    PROJECT & CERTIFICATE THUMBNAIL GENERATOR (Supports Real Images & Fallback SVG)
    ========================================================================== */
+function normalizeExternalUrl(url) {
+  if (!url || typeof url !== "string") return "";
+  const trimmed = url.trim();
+  if (!trimmed) return "";
+  if (/^(https?:\/\/|mailto:|tel:|\/|\.)/i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
+}
+
 function renderProjectThumbnail(project) {
   if (project.image && project.image.trim() !== "") {
     return `
@@ -204,7 +212,7 @@ function renderPortfolioShowcase() {
           <div class="flex items-center justify-between gap-3 pt-1">
             ${proj.liveUrl && proj.liveUrl.trim() !== "" ? `
             <a
-              href="${proj.liveUrl}"
+              href="${normalizeExternalUrl(proj.liveUrl)}"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent-secondary)] hover:underline"
@@ -437,8 +445,9 @@ function openProjectDetailModal(proj) {
 
   // Defensive handling for action buttons (Live Demo & Source Code)
   if (liveLinkEl) {
-    if (proj.liveUrl) {
-      liveLinkEl.setAttribute("href", proj.liveUrl);
+    const safeLiveUrl = normalizeExternalUrl(proj.liveUrl);
+    if (safeLiveUrl) {
+      liveLinkEl.setAttribute("href", safeLiveUrl);
       liveLinkEl.classList.remove("hidden");
     } else {
       liveLinkEl.classList.add("hidden");
@@ -446,8 +455,9 @@ function openProjectDetailModal(proj) {
   }
 
   if (repoLinkEl) {
-    if (proj.repoUrl) {
-      repoLinkEl.setAttribute("href", proj.repoUrl);
+    const safeRepoUrl = normalizeExternalUrl(proj.repoUrl);
+    if (safeRepoUrl) {
+      repoLinkEl.setAttribute("href", safeRepoUrl);
       repoLinkEl.classList.remove("hidden");
     } else {
       repoLinkEl.classList.add("hidden");
