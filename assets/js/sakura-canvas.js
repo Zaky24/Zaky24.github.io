@@ -115,11 +115,28 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
     const petalCount = width < 768 ? 20 : 38;
     const moteCount = width < 768 ? 12 : 24;
 
-    petals.length = 0;
-    for (let i = 0; i < petalCount; i++) petals.push(createPetal(true));
+    // Jangan mereset/menghapus kelopak yang sedang melayang saat resize/scroll di HP
+    if (petals.length === 0) {
+      for (let i = 0; i < petalCount; i++) petals.push(createPetal(true));
+    } else {
+      while (petals.length < petalCount) {
+        petals.push(createPetal(false));
+      }
+      if (petals.length > petalCount) {
+        petals.length = petalCount;
+      }
+    }
 
-    motes.length = 0;
-    for (let i = 0; i < moteCount; i++) motes.push(createMote());
+    if (motes.length === 0) {
+      for (let i = 0; i < moteCount; i++) motes.push(createMote());
+    } else {
+      while (motes.length < moteCount) {
+        motes.push(createMote());
+      }
+      if (motes.length > moteCount) {
+        motes.length = moteCount;
+      }
+    }
 
     if (reducedMotionQuery.matches) {
       renderFrame();
@@ -205,20 +222,24 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
       p.phase += p.swayFreq;
       p.flip += p.flipSpeed;
 
-      const dx = p.x - pointer.x;
-      const dy = p.y - pointer.y;
-      const distSq = dx * dx + dy * dy;
-      const radius = 95;
+      // Hanya kalkulasi interaksi jika kursor mouse desktop aktif di dalam layar
+      if (pointer.x > -100 && pointer.y > -100) {
+        const dx = p.x - pointer.x;
+        const dy = p.y - pointer.y;
+        const distSq = dx * dx + dy * dy;
+        const radius = 90;
 
-      if (distSq < radius * radius && distSq > 1) {
-        const dist = Math.sqrt(distSq);
-        const force = (1 - dist / radius) * 0.42;
-        p.vx += (dx / dist) * force + pointer.vx * 0.015;
-        p.vy += (dy / dist) * force + pointer.vy * 0.015;
+        if (distSq < radius * radius && distSq > 1) {
+          const dist = Math.sqrt(distSq);
+          const force = (1 - dist / radius) * 0.35;
+          p.vx += (dx / dist) * force + pointer.vx * 0.01;
+          p.vy += (dy / dist) * force + pointer.vy * 0.01;
+        }
       }
 
-      p.vx *= 0.94;
-      p.vy *= 0.94;
+      // Redam gaya dan batasi kecepatan maksimum agar kelopak tidak melesat cepat
+      p.vx = Math.max(-2.5, Math.min(2.5, p.vx * 0.94));
+      p.vy = Math.max(-2.5, Math.min(2.5, p.vy * 0.94));
 
       p.x += p.speedX + Math.sin(p.phase) * p.swayAmp + p.vx;
       p.y += p.speedY + Math.cos(p.phase * 0.7) * 0.15 + p.vy;
@@ -233,8 +254,8 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
       drawFinePixelPetal(p, palette);
     }
 
-    pointer.vx *= 0.85;
-    pointer.vy *= 0.85;
+    pointer.vx *= 0.82;
+    pointer.vy *= 0.82;
   }
 
   function loop() {
@@ -243,13 +264,40 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
     animationFrameId = requestAnimationFrame(loop);
   }
 
+  function resetPointer() {
+    pointer.x = -9999;
+    pointer.y = -9999;
+    pointer.lastX = -9999;
+    pointer.lastY = -9999;
+    pointer.vx = 0;
+    pointer.vy = 0;
+  }
+
   window.addEventListener("resize", resize, { passive: true });
+  window.addEventListener("scroll", resetPointer, { passive: true });
+  window.addEventListener("pointerleave", resetPointer, { passive: true });
+  window.addEventListener("pointerup", resetPointer, { passive: true });
+  window.addEventListener("pointercancel", resetPointer, { passive: true });
+  window.addEventListener("touchend", resetPointer, { passive: true });
+  window.addEventListener("touchcancel", resetPointer, { passive: true });
+
   window.addEventListener(
     "pointermove",
     (e) => {
-      if (reducedMotionQuery.matches) return;
-      pointer.vx = e.clientX - (pointer.lastX === -9999 ? e.clientX : pointer.lastX);
-      pointer.vy = e.clientY - (pointer.lastY === -9999 ? e.clientY : pointer.lastY);
+      // Abaikan di mode reduced-motion ATAU jika bersumber dari sentuhan layar HP/tablet (touch/pen)
+      // agar gestur swipe & scrolling di HP tidak meniup atau mempercepat kelopak sakura
+      if (reducedMotionQuery.matches || e.pointerType === "touch" || e.pointerType === "pen") {
+        resetPointer();
+        return;
+      }
+
+      const rawVx = e.clientX - (pointer.lastX === -9999 ? e.clientX : pointer.lastX);
+      const rawVy = e.clientY - (pointer.lastY === -9999 ? e.clientY : pointer.lastY);
+
+      // Batasi kecepatan kursor agar tidak terjadi lonjakan gaya impulsif
+      pointer.vx = Math.max(-8, Math.min(8, rawVx));
+      pointer.vy = Math.max(-8, Math.min(8, rawVy));
+
       pointer.x = e.clientX;
       pointer.y = e.clientY;
       pointer.lastX = e.clientX;

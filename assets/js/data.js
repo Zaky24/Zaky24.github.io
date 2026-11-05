@@ -209,8 +209,8 @@ export const CERTIFICATES_DATA = [
     title: "Belajar Membuat Aplikasi Back-End & REST API",
     issuer: "Dicoding Indonesia",
     date: "2025",
-    image: "",
-    badgeColor: ""
+    image: "assets/img/sertifikat/olimpiadeIT.png",
+    // badgeColor: ""
   },
   {
     id: "cert-6",

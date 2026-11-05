@@ -3,8 +3,8 @@ import {
   PROJECTS_DATA,
   CERTIFICATES_DATA,
   TECH_STACK_DATA
-} from "./data.js";
-import { initSakuraCanvas } from "./sakura-canvas.js";
+} from "./data.js?v=1.5";
+import { initSakuraCanvas } from "./sakura-canvas.js?v=1.5";
 
 /* ==========================================================================
    PROJECT & CERTIFICATE THUMBNAIL GENERATOR (Supports Real Images & Fallback SVG)
