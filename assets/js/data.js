@@ -43,17 +43,25 @@ export const PROFILE_DATA = {
 };
 
 /* ==========================================================================
-   PANDUAN MENGEDIT PROYEK KAMU SENDIRI:
-   Cukup edit teks di bawah ini!
+   PANDUAN LENGKAP KUSTOMISASI PROYEK KAMU:
+   Cukup edit data di bawah ini!
    - title: Nama proyek
-   - category: Kategori (Fullstack Web, Frontend, dll)
+   - category: Kategori (Fullstack Web, Frontend, UI/UX Design, dll)
    - timeline: Tahun / durasi pengerjaan
+   - image: Link gambar thumbnail proyek (contoh: "./assets/img/projects/siakad.png" atau link URL https://...).
+            Jika dikosongkan (""), otomatis menampilkan ilustrasi SVG cyberpunk yang keren!
    - description: Ringkasan singkat yang tampil di kartu depan
-   - story: Cerita perjalanan kamu membuat proyek ini (latar belakang, tujuan, tantangan, dll)
-   - features: Daftar fitur utama proyek kamu (bisa ditambah atau dikurangi)
-   - tech: Daftar teknologi yang kamu gunakan
-   - liveUrl: Link demo proyek (atau link GitHub jika belum deploy)
-   - repoUrl: Link source code GitHub (kosongkan "" jika tidak ingin menampilkan tombol source code)
+   - story: Cerita perjalanan proyek. BISA TULIS TEKS BIASA ATAU TAG HTML (<p>, <strong>, <a>, <img>, dll).
+   - sections: [OPSIONAL] Tambah kolom-kolom baru sesuka hatimu! Tampilan otomatis rapi dan serasi dengan tema:
+               sections: [
+                 { title: "Latar Belakang", content: "Cerita latar belakang..." },
+                 { title: "Tantangan Teknis", content: "Tantangan yang dihadapi..." },
+                 { title: "Peran Saya", content: "Tanggung jawab dalam tim..." }
+               ]
+   - features: Daftar fitur utama. Kosongkan [] jika tidak ingin menampilkan fitur.
+   - tech: Daftar teknologi. Kosongkan [] jika proyek tidak menggunakan tech stack (otomatis disembunyikan rapi!).
+   - liveUrl: Link demo proyek (kosongkan "" jika belum ada demo live).
+   - repoUrl: Link source code GitHub (kosongkan "" jika tidak ingin menampilkan tombol source code).
    ========================================================================== */
 export const PROJECTS_DATA = [
   {
@@ -61,10 +69,21 @@ export const PROJECTS_DATA = [
     title: "SIAKAD Campus Portal",
     category: "Fullstack Web",
     timeline: "2025",
+    image: "", // Masukkan link gambar proyek kamu di sini (misal: "./assets/img/projects/siakad.png" atau URL https://...)
     description:
       "Sistem informasi akademik berbasis web untuk manajemen jadwal kuliah, nilai mahasiswa, dan presensi digital secara real-time dengan antarmuka responsif.",
     story:
       "Proyek ini berawal dari kebutuhan praktis di lingkungan kampus Politeknik LP3I untuk mempermudah mahasiswa mengecek jadwal dan nilai kuliah secara cepat dari HP. Tantangan terbesarnya adalah merancang struktur database yang optimal untuk ratusan data mahasiswa serta membangun antarmuka yang bersih dan responsif menggunakan Tailwind CSS.",
+    sections: [
+      {
+        title: "Latar Belakang & Masalah",
+        content: "Sebelumnya presensi dan jadwal masih diakses melalui sistem yang lambat saat jam sibuk. Aplikasi ini dirancang agar ringan dan dapat diakses cepat dari smartphone."
+      },
+      {
+        title: "Tantangan Teknis & Solusi",
+        content: "Mengoptimalkan query database relasional antara tabel mahasiswa, dosen, dan mata kuliah agar kalkulasi IPK dan pencetakan KHS berjalan instan."
+      }
+    ],
     features: [
       "Dashboard jadwal kuliah harian & notifikasi perubahan kelas",
       "Presensi digital mahasiswa terintegrasi",
@@ -187,9 +206,10 @@ export const PROJECTS_DATA = [
 export const CERTIFICATES_DATA = [
   {
     id: "cert-1",
-    title: "Belajar Dasar Pemrograman Web & Frontend",
-    issuer: "Dicoding Indonesia",
+    title: "Junior Office Operator",
+    issuer: "BNSP",
     date: "2025",
+    image: "assets/img/sertifikat/juniorOfficeOperator.png",
     badgeColor: "#E05263"
   },
   {
@@ -197,6 +217,7 @@ export const CERTIFICATES_DATA = [
     title: "Belajar Membuat Aplikasi Back-End & REST API",
     issuer: "Dicoding Indonesia",
     date: "2025",
+    image: "",
     badgeColor: "#38BDF8"
   },
   {
@@ -204,6 +225,7 @@ export const CERTIFICATES_DATA = [
     title: "JavaScript Algorithms & Data Structures",
     issuer: "freeCodeCamp",
     date: "2025",
+    image: "",
     badgeColor: "#F59E0B"
   },
   {
@@ -211,6 +233,7 @@ export const CERTIFICATES_DATA = [
     title: "Responsive Web Design & Modern CSS Architecture",
     issuer: "freeCodeCamp",
     date: "2024",
+    image: "",
     badgeColor: "#10B981"
   },
   {
@@ -218,6 +241,7 @@ export const CERTIFICATES_DATA = [
     title: "Database Design & SQL Programming",
     issuer: "Oracle Academy / Campus Workshop",
     date: "2025",
+    image: "",
     badgeColor: "#A855F7"
   },
   {
@@ -225,21 +249,94 @@ export const CERTIFICATES_DATA = [
     title: "Git & GitHub Version Control Mastery",
     issuer: "Progate / Skillvul",
     date: "2024",
+    image: "",
     badgeColor: "#38BDF8"
   }
 ];
 
 export const TECH_STACK_DATA = [
-  { name: "HTML5", category: "Frontend", color: "#E34F26", code: "HTML" },
-  { name: "CSS3", category: "Frontend", color: "#1572B6", code: "CSS" },
-  { name: "JavaScript", category: "Language", color: "#F7DF1E", code: "JS" },
-  { name: "TypeScript", category: "Language", color: "#3178C6", code: "TS" },
-  { name: "Tailwind CSS", category: "Frontend", color: "#06B6D4", code: "TW" },
-  { name: "React JS", category: "Frontend", color: "#61DAFB", code: "RCT" },
-  { name: "Next.js", category: "Fullstack", color: "#F8FAFC", code: "NXT" },
-  { name: "Node.js", category: "Backend", color: "#339933", code: "NODE" },
-  { name: "PHP / Laravel", category: "Backend", color: "#FF2D20", code: "LRV" },
-  { name: "MySQL", category: "Database", color: "#4479A1", code: "SQL" },
-  { name: "PostgreSQL", category: "Database", color: "#336791", code: "PG" },
-  { name: "Git & GitHub", category: "Tools", color: "#F05032", code: "GIT" }
+  {
+    name: "HTML5",
+    category: "Frontend",
+    color: "#E34F26",
+    code: "HTML",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+  },
+  {
+    name: "CSS3",
+    category: "Frontend",
+    color: "#1572B6",
+    code: "CSS",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+  },
+  {
+    name: "JavaScript",
+    category: "Language",
+    color: "#F7DF1E",
+    code: "JS",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+  },
+  {
+    name: "TypeScript",
+    category: "Language",
+    color: "#3178C6",
+    code: "TS",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+  },
+  {
+    name: "Tailwind CSS",
+    category: "Frontend",
+    color: "#06B6D4",
+    code: "TW",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+  },
+  {
+    name: "React JS",
+    category: "Frontend",
+    color: "#61DAFB",
+    code: "RCT",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+  },
+  {
+    name: "Next.js",
+    category: "Fullstack",
+    color: "#F8FAFC",
+    code: "NXT",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+  },
+  {
+    name: "Node.js",
+    category: "Backend",
+    color: "#339933",
+    code: "NODE",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+  },
+  {
+    name: "PHP / Laravel",
+    category: "Backend",
+    color: "#FF2D20",
+    code: "LRV",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
+  },
+  {
+    name: "MySQL",
+    category: "Database",
+    color: "#4479A1",
+    code: "SQL",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+  },
+  {
+    name: "PostgreSQL",
+    category: "Database",
+    color: "#336791",
+    code: "PG",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+  },
+  {
+    name: "Git & GitHub",
+    category: "Tools",
+    color: "#F05032",
+    code: "GIT",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+  }
 ];

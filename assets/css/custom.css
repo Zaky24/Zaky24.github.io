@@ -191,6 +191,72 @@ h3 {
 }
 
 /* ==========================================================================
+   HERO ANIMATED PIXEL BACKDROP (Sakura Tree, Commuter Train, Tokyo Skyline)
+   ========================================================================== */
+
+.hero-pixel-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-pixel-art-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right 45%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  opacity: 0.80;
+  filter: contrast(1.08) brightness(0.95);
+  transition: opacity 300ms ease;
+}
+
+[data-theme="light"] .hero-pixel-art-img {
+  opacity: 0.70;
+  filter: contrast(1.04) brightness(1.02);
+}
+
+.hero-backdrop-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--bg-ground) 0%,
+    rgba(7, 11, 20, 0.90) 38%,
+    rgba(7, 11, 20, 0.50) 65%,
+    rgba(7, 11, 20, 0.05) 100%
+  );
+  z-index: 1;
+}
+
+[data-theme="light"] .hero-backdrop-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--bg-ground) 0%,
+    rgba(250, 247, 242, 0.92) 38%,
+    rgba(250, 247, 242, 0.45) 65%,
+    rgba(250, 247, 242, 0.05) 100%
+  );
+}
+
+.hero-backdrop-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 78%,
+    var(--bg-ground) 100%
+  );
+  z-index: 2;
+}
+
+/* ==========================================================================
    HERO 3D TILT OBJECT & GFX SHOWCASE
    ========================================================================== */
 
@@ -243,9 +309,7 @@ h3 {
 .profile-character-stage:hover .profile-character-base {
   transform: scale(1.02);
   filter:
-    drop-shadow(2.5px 0 0 var(--accent-primary))
-    drop-shadow(-2.5px 0 0 var(--accent-secondary))
-    drop-shadow(0 -2px 0 var(--accent-primary));
+    drop-shadow(2.5px 0 0 var(--accent-primary)) drop-shadow(-2.5px 0 0 var(--accent-secondary)) drop-shadow(0 -2px 0 var(--accent-primary));
 }
 
 /* Glitch Clone Layers (Langsung aktif instan saat hover) */
@@ -279,19 +343,24 @@ h3 {
     clip-path: inset(16% 0 62% 0);
     transform: translate(-4px, 1px);
   }
+
   15% {
     clip-path: inset(48% 0 28% 0);
     transform: translate(3px, -1px);
   }
+
   30% {
     clip-path: inset(72% 0 12% 0);
     transform: translate(-3px, 2px);
   }
+
   45% {
     clip-path: inset(24% 0 52% 0);
     transform: translate(4px, 0);
   }
-  60%, 100% {
+
+  60%,
+  100% {
     clip-path: inset(0 0 100% 0);
     transform: translate(0, 0);
   }
@@ -302,19 +371,24 @@ h3 {
     clip-path: inset(36% 0 42% 0);
     transform: translate(4px, -1px);
   }
+
   15% {
     clip-path: inset(12% 0 68% 0);
     transform: translate(-3px, 2px);
   }
+
   30% {
     clip-path: inset(58% 0 22% 0);
     transform: translate(3px, -1px);
   }
+
   45% {
     clip-path: inset(82% 0 6% 0);
     transform: translate(-2px, 0);
   }
-  60%, 100% {
+
+  60%,
+  100% {
     clip-path: inset(0 0 100% 0);
     transform: translate(0, 0);
   }
@@ -452,4 +526,78 @@ h3 {
   background-color: var(--accent-primary);
   color: var(--accent-on-primary);
   box-shadow: var(--shadow-btn);
+}
+
+/* ==========================================================================
+   MODAL RICH CONTENT STYLES (Auto-matches Dark Cyber-Sakura Theme)
+   ========================================================================== */
+.modal-formatted-content p,
+#proj-modal-story p {
+  margin-bottom: 0.85rem;
+  line-height: 1.65;
+}
+
+.modal-formatted-content p:last-child,
+#proj-modal-story p:last-child {
+  margin-bottom: 0;
+}
+
+.modal-formatted-content strong,
+.modal-formatted-content b,
+#proj-modal-story strong,
+#proj-modal-story b {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.modal-formatted-content a,
+#proj-modal-story a {
+  color: var(--accent-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 150ms;
+}
+
+.modal-formatted-content a:hover,
+#proj-modal-story a:hover {
+  color: var(--accent-primary);
+}
+
+.modal-formatted-content ul,
+#proj-modal-story ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  margin: 0.5rem 0 0.85rem 0;
+}
+
+.modal-formatted-content ol,
+#proj-modal-story ol {
+  list-style-type: decimal;
+  padding-left: 1.25rem;
+  margin: 0.5rem 0 0.85rem 0;
+}
+
+.modal-formatted-content li,
+#proj-modal-story li {
+  margin-bottom: 0.35rem;
+}
+
+.modal-formatted-content img,
+#proj-modal-story img {
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  max-width: 100%;
+  height: auto;
+  margin: 0.75rem 0;
+}
+
+.modal-formatted-content blockquote,
+#proj-modal-story blockquote {
+  background-color: var(--bg-pill);
+  border: 1px solid var(--border-subtle);
+  padding: 0.85rem 1.15rem;
+  border-radius: 0.75rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0.75rem 0;
 }

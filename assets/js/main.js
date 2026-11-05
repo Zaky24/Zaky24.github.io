@@ -7,9 +7,20 @@ import {
 import { initSakuraCanvas } from "./sakura-canvas.js";
 
 /* ==========================================================================
-   PROJECT & CERTIFICATE ILLUSTRATION GENERATOR
+   PROJECT & CERTIFICATE THUMBNAIL GENERATOR (Supports Real Images & Fallback SVG)
    ========================================================================== */
 function renderProjectThumbnail(project) {
+  if (project.image && project.image.trim() !== "") {
+    return `
+      <img
+        src="${project.image}"
+        alt="${project.title} Preview"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+    `;
+  }
+
   const { accentColor, secondaryColor, category, title } = project;
   return `
     <svg viewBox="0 0 480 250" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" role="img" aria-label="${title} preview">
@@ -51,6 +62,17 @@ function renderProjectThumbnail(project) {
 }
 
 function renderCertificateThumbnail(cert) {
+  if (cert.image && cert.image.trim() !== "") {
+    return `
+      <img
+        src="${cert.image}"
+        alt="${cert.title}"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+    `;
+  }
+
   return `
     <svg viewBox="0 0 420 240" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" role="img" aria-label="${cert.title}">
       <rect width="420" height="240" fill="#0D1424" />
@@ -168,16 +190,19 @@ function renderPortfolioShowcase() {
         </div>
 
         <div class="space-y-4 pt-3 border-t border-[var(--border-subtle)]">
+          ${Array.isArray(proj.tech) && proj.tech.length > 0 ? `
           <div class="flex flex-wrap gap-1.5">
             ${proj.tech
-          .map(
-            (t) =>
-              `<span class="tabular-nums-data text-xs px-2.5 py-1 rounded-md bg-[var(--bg-pill)] text-[var(--text-secondary)]">${t}</span>`
-          )
-          .join("")}
+              .map(
+                (t) =>
+                  `<span class="tabular-nums-data text-xs px-2.5 py-1 rounded-md bg-[var(--bg-pill)] text-[var(--text-secondary)]">${t}</span>`
+              )
+              .join("")}
           </div>
+          ` : ""}
 
           <div class="flex items-center justify-between gap-3 pt-1">
+            ${proj.liveUrl && proj.liveUrl.trim() !== "" ? `
             <a
               href="${proj.liveUrl}"
               target="_blank"
@@ -191,11 +216,12 @@ function renderPortfolioShowcase() {
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
             </a>
+            ` : `<span class="text-xs text-[var(--text-muted)] tabular-nums-data">Portfolio Showcase</span>`}
 
             <button
               type="button"
               data-project-id="${proj.id}"
-              class="project-detail-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--accent-primary)] text-[var(--accent-on-primary)] text-xs font-bold cursor-pointer transition-transform hover:-translate-y-0.5"
+              class="project-detail-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--accent-primary)] text-[var(--accent-on-primary)] text-xs font-bold cursor-pointer transition-transform hover:-translate-y-0.5 ml-auto"
             >
               <span>Details</span>
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -259,15 +285,19 @@ function renderPortfolioShowcase() {
     });
   }
 
+  // Tech Stack Grid (Supports custom logo image icon or stylized code badge)
   if (techStackGrid) {
     techStackGrid.innerHTML = TECH_STACK_DATA.map(
       (item) => `
-      <div class="surface-card surface-card-interactive flex flex-col items-center justify-center text-center p-5 gap-3">
+      <div class="surface-card surface-card-interactive flex flex-col items-center justify-center text-center p-5 gap-3 group">
         <div
-          class="w-14 h-14 rounded-2xl flex items-center justify-center font-pixel-accent text-sm font-bold"
+          class="w-14 h-14 rounded-2xl flex items-center justify-center p-2.5 transition-transform group-hover:scale-110"
           style="background-color: ${item.color}18; color: ${item.color};"
         >
-          ${item.code}
+          ${item.icon && item.icon.trim() !== ""
+            ? `<img src="${item.icon}" alt="${item.name} icon" class="w-8 h-8 object-contain" loading="lazy" />`
+            : `<span class="font-pixel-accent text-sm font-bold">${item.code}</span>`
+          }
         </div>
         <div>
           <h3 class="text-base font-bold text-[var(--text-primary)] mb-0.5">${item.name}</h3>
@@ -280,7 +310,7 @@ function renderPortfolioShowcase() {
 }
 
 /* ==========================================================================
-   PROJECT DETAIL POPUP MODAL (CERITA PERJALANAN & FITUR UTAMA)
+   PROJECT DETAIL POPUP MODAL (CERITA PERJALANAN, SECTIONS TAMBAHAN & FITUR)
    ========================================================================== */
 function openProjectDetailModal(proj) {
   const modal = document.getElementById("project-detail-modal");
@@ -290,6 +320,9 @@ function openProjectDetailModal(proj) {
   const metaEl = document.getElementById("proj-modal-meta");
   const bannerEl = document.getElementById("proj-modal-banner");
   const storyEl = document.getElementById("proj-modal-story");
+  const storyWrap = document.getElementById("proj-modal-story-wrap");
+  const sectionsEl = document.getElementById("proj-modal-sections");
+  const featuresWrap = document.getElementById("proj-modal-features-wrap");
   const featuresEl = document.getElementById("proj-modal-features");
   const techEl = document.getElementById("proj-modal-tech");
   const liveLinkEl = document.getElementById("proj-modal-live");
@@ -303,16 +336,48 @@ function openProjectDetailModal(proj) {
   }
   if (bannerEl) bannerEl.innerHTML = renderProjectThumbnail(proj);
 
+  // Story Utama (Mendukung Teks Biasa maupun Tag HTML Bebas)
   if (storyEl) {
-    if (typeof proj.story === "string") {
-      storyEl.textContent = proj.story;
-    } else if (proj.story && proj.story.background) {
-      storyEl.textContent = proj.story.background;
+    const rawStory = typeof proj.story === "string"
+      ? proj.story
+      : (proj.story && proj.story.background)
+        ? proj.story.background
+        : (proj.description || "");
+
+    if (rawStory.trim() !== "") {
+      storyEl.innerHTML = rawStory;
+      if (storyWrap) storyWrap.classList.remove("hidden");
     } else {
-      storyEl.textContent = proj.description || "";
+      storyEl.innerHTML = "";
+      if (storyWrap) storyWrap.classList.add("hidden");
     }
   }
 
+  // Custom Sections Tambahan (Bebas ditambah tanpa pusing mikir CSS)
+  if (sectionsEl) {
+    if (Array.isArray(proj.sections) && proj.sections.length > 0) {
+      sectionsEl.innerHTML = proj.sections
+        .map(
+          (sec) => `
+        <div class="space-y-1.5 p-4 rounded-xl bg-[var(--bg-pill)] border border-[var(--border-subtle)]">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-secondary)] font-pixel-accent">
+            ${sec.title}
+          </h4>
+          <div class="text-sm text-[var(--text-secondary)] leading-relaxed modal-formatted-content">
+            ${sec.content}
+          </div>
+        </div>
+      `
+        )
+        .join("");
+      sectionsEl.classList.remove("hidden");
+    } else {
+      sectionsEl.innerHTML = "";
+      sectionsEl.classList.add("hidden");
+    }
+  }
+
+  // Fitur Utama
   if (featuresEl) {
     const featureList = Array.isArray(proj.features)
       ? proj.features
@@ -320,25 +385,38 @@ function openProjectDetailModal(proj) {
         ? proj.story.keyFeatures
         : [];
 
-    featuresEl.innerHTML = featureList
-      .map(
-        (feat) => `
-      <li class="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-        <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] mt-2 shrink-0"></span>
-        <span>${feat}</span>
-      </li>
-    `
-      )
-      .join("");
+    if (featureList.length > 0) {
+      featuresEl.innerHTML = featureList
+        .map(
+          (feat) => `
+        <li class="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] mt-2 shrink-0"></span>
+          <span>${feat}</span>
+        </li>
+      `
+        )
+        .join("");
+      if (featuresWrap) featuresWrap.classList.remove("hidden");
+    } else {
+      featuresEl.innerHTML = "";
+      if (featuresWrap) featuresWrap.classList.add("hidden");
+    }
   }
 
-  if (techEl && Array.isArray(proj.tech)) {
-    techEl.innerHTML = proj.tech
-      .map(
-        (t) =>
-          `<span class="tabular-nums-data text-xs px-2.5 py-1 rounded-md bg-[var(--bg-pill)] text-[var(--accent-secondary)]">${t}</span>`
-      )
-      .join("");
+  // Tech Stack Pills
+  if (techEl) {
+    if (Array.isArray(proj.tech) && proj.tech.length > 0) {
+      techEl.innerHTML = proj.tech
+        .map(
+          (t) =>
+            `<span class="tabular-nums-data text-xs px-2.5 py-1 rounded-md bg-[var(--bg-pill)] text-[var(--accent-secondary)]">${t}</span>`
+        )
+        .join("");
+      techEl.classList.remove("hidden");
+    } else {
+      techEl.innerHTML = "";
+      techEl.classList.add("hidden");
+    }
   }
 
   // Defensive handling for action buttons (Live Demo & Source Code)

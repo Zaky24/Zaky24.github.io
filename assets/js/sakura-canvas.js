@@ -45,13 +45,13 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
       };
     }
     return {
-      horizonSilhouette: "rgba(15, 23, 42, 0.65)",
-      windowPixel: "rgba(56, 189, 248, 0.18)",
-      petalMain: "#E05263",
-      petalSoft: "#F28482",
-      petalCore: "#FECDD3",
+      horizonSilhouette: "transparent",
+      windowPixel: "transparent",
+      petalMain: "#FF5277",
+      petalSoft: "#FF7597",
+      petalCore: "#FFE4E8",
       moteColor: "rgba(56, 189, 248, 0.26)",
-      sparkPrimary: "#E05263",
+      sparkPrimary: "#FF5277",
       sparkSecondary: "#38BDF8"
     };
   }
@@ -60,7 +60,7 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
     return {
       x: Math.random() * width,
       y: randomY ? Math.random() * height : -20 - Math.random() * 60,
-      unit: Math.random() > 0.4 ? 2.5 : 2,
+      unit: Math.random() > 0.4 ? 3.5 : 2.8,
       speedY: 0.4 + Math.random() * 0.65,
       speedX: -0.25 - Math.random() * 0.4,
       swayAmp: 0.35 + Math.random() * 0.65,
@@ -170,8 +170,6 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
   function renderFrame() {
     ctx.clearRect(0, 0, width, height);
     const palette = getPalette();
-
-    drawSubtlePixelBackdrop(palette);
 
     // Draw floating ambient pixel motes
     ctx.fillStyle = palette.moteColor;
