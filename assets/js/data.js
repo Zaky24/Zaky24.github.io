@@ -205,7 +205,7 @@ export const PROJECTS_DATA = [
 
 export const CERTIFICATES_DATA = [
   {
-    id: "cert-1",
+    id: "cert-6",
     title: "Junior Office Operator",
     issuer: "BNSP",
     date: "2025",
@@ -218,7 +218,7 @@ export const CERTIFICATES_DATA = [
     issuer: "Dicoding Indonesia",
     date: "2025",
     image: "",
-    badgeColor: "#38BDF8"
+    badgeColor: ""
   },
   {
     id: "cert-3",
@@ -245,7 +245,7 @@ export const CERTIFICATES_DATA = [
     badgeColor: "#A855F7"
   },
   {
-    id: "cert-6",
+    id: "cert-8",
     title: "Git & GitHub Version Control Mastery",
     issuer: "Progate / Skillvul",
     date: "2024",
