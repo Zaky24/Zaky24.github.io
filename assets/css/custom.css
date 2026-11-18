@@ -528,6 +528,85 @@ h3 {
 }
 
 /* ==========================================================================
+   PORTFOLIO PAGINATION
+   ========================================================================== */
+
+.pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.pagination-bar[hidden] {
+  display: none;
+}
+
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-pill);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 180ms var(--ease-out-expo), background-color 180ms var(--ease-out-expo), transform 180ms var(--ease-out-expo);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  border-color: var(--accent-secondary);
+  background-color: var(--bg-card-hover);
+  transform: translateY(-1px);
+}
+
+.pagination-btn[aria-current="page"] {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: var(--accent-on-primary);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-status {
+  flex-basis: 100%;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Tanpa JavaScript: tampilkan semua kartu, sembunyikan kontrol halaman */
+.no-js .pagination-bar {
+  display: none;
+}
+
+/* Kartu disembunyikan saat pindah halaman (diatur JS) */
+.showcase-card-hidden {
+  display: none !important;
+}
+
+/* Judul section yang lebih ringkas di HP */
+@media (max-width: 640px) {
+  .pagination-btn {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0 0.6rem;
+  }
+}
+
+/* ==========================================================================
    MODAL RICH CONTENT STYLES (Auto-matches Dark Cyber-Sakura Theme)
    ========================================================================== */
 .modal-formatted-content p,

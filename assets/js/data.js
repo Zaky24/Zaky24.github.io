@@ -5,7 +5,7 @@ export const PROFILE_DATA = {
   roles: [
     "Web Developer",
     "Fullstack Developer",
-    "Software Engineer"
+    "Junior Web Developer"
   ],
   heroDescription:
     "Membangun website dan aplikasi fullstack yang modern, responsif, cepat, dan ramah pengguna. Menggabungkan fondasi kode yang bersih dengan desain antarmuka yang interaktif.",
@@ -18,7 +18,7 @@ export const PROFILE_DATA = {
   heroGif: "./heroSection.gif",
   aboutQuote: '"Transforming ideas into functional and memorable digital experiences."',
   aboutBioPrimary:
-    "Halo! Saya Ira Zaky Elmar, seorang mahasiswa aktif di Politeknik LP3I yang memiliki ketertarikan mendalam di bidang Software Engineering, Web Development, dan Fullstack Development.",
+    "Halo! Saya Ira Zaky Elmar, seorang mahasiswa aktif di Politeknik LP3I yang memiliki ketertarikan mendalam di bidang Web Development dan Fullstack Development.",
   aboutBioSecondary:
     "Selama masa perkuliahan dan eksplorasi mandiri, saya aktif merancang serta mengembangkan berbagai proyek aplikasi web dari sisi frontend hingga backend. Saya selalu berfokus pada performa, tampilan UI/UX yang modern, serta struktur kode yang rapi dan mudah dikembangkan.",
   journeyStartYear: 2024, // Tahun mulai kuliah & eksplorasi mendalam dunia IT (otomatis menghitung yearsLearning)
@@ -93,13 +93,17 @@ export const PROJECTS_DATA = [
     timeline: "2025",
     image: "assets/img/project/evoting.png",
     description:
-      "Sistem E-Voting berbasis web untuk mempermudah serta menghemat waktu dan kertas dalam pemilihan Ketua Badan Eksekutif Mahasiswa di Politeknik LP3I Padang.",
+      "Sistem E-Voting berbasis web untuk mempermudah serta menghemat waktu dan kertas dalam pemilihan calon Ketua Badan Eksekutif Mahasiswa di Politeknik LP3I Padang.",
     story:
       "Proyek ini berawal dari kebutuhan nyata di lingkungan kampus Politeknik LP3I Padang untuk mempermudah mahasiswa dalam memilih kandidat secara digital, mengingat keterbatasan waktu jika dilakukan secara manual. Selaku Menteri KOMINFO BEM pada saat itu, saya diamanahkan untuk merancang dan menyelesaikan sistem E-Voting ini dalam waktu singkat (± 10 hari).",
     sections: [
       {
         title: "Tantangan & Solusi",
-        content: "Dengan tenggat waktu pengerjaan yang sangat singkat di tengah padatnya jadwal perkuliahan, saya menerapkan manajemen waktu yang ketat serta mengadaptasi dan memodifikasi arsitektur sistem E-Voting berbasis Laravel sesuai kebutuhan pemilihan kampus. Hasilnya, sistem E-Voting ini sukses digunakan secara efisien, transparan, serta menghemat waktu dan penggunaan kertas."
+        content: "Dengan tenggat waktu pengerjaan yang sangat singkat di tengah padatnya jadwal perkuliahan, saya menerapkan manajemen waktu yang ketat serta memodifikasi arsitektur sistem E-Voting berbasis Laravel di internet sesuai kebutuhan pemilihan kampus. Hasilnya, sistem E-Voting ini sukses digunakan secara efisien, transparan, menghemat waktu dan penggunaan kertas."
+      },
+      {
+        title: "Ucapan Terima Kasih",
+        content: "Saya mengambil repositori publik dari 'github: https://github.com/Sleepy4k/laravel-voting-osis.git'. Maaf sebelumnya kalau semisalnya saya belum izin, dan saya mengucapkan terimakasih untuk repositori yang Abang publikasikan, sehingga pemilihan calon ketua BEM di kampus saya bisa terlaksanakan dengan aman dan lancar"
       }
     ],
     features: [
@@ -119,31 +123,7 @@ export const PROJECTS_DATA = [
 
 export const CERTIFICATES_DATA = [
   {
-    id: "cert-1",
-    title: "Olimpiade IT SLTA",
-    issuer: "HMJ-MI UMMY",
-    date: "2024",
-    image: "assets/img/sertifikat/olimpiadeIT.png",
-    badgeColor: "#38BDF8"
-  },
-  {
-    id: "cert-2",
-    title: "Junior Office Operator",
-    issuer: "BNSP",
-    date: "2025",
-    image: "assets/img/sertifikat/juniorOfficeOperator.png",
-    badgeColor: "#E05263"
-  },
-  {
-    id: "cert-3",
-    title: "Raimuna Nasional XII",
-    issuer: "Kwartir Nasional Gerakan Pramuka",
-    date: "2023",
-    image: "assets/img/sertifikat/rainas.png",
-    badgeColor: "#F59E0B"
-  },
-  {
-    id: "cert-4",
+    id: "cert-11",
     title: "Cybertech Programming Competition",
     issuer: "UKM Cybertech PNP",
     date: "2026",
@@ -151,36 +131,84 @@ export const CERTIFICATES_DATA = [
     badgeColor: "#0284C7"
   },
   {
-    id: "cert-5",
-    title: "Menteri Komunikasi dan Informatika",
-    issuer: "BEM Politeknik LP3I Kampus Padang",
+    id: "cert-10",
+    title: "Ketua Umum Relawan TIK Padang",
+    issuer: "Relawan TIK Padang",
     date: "2026",
-    image: "assets/img/sertifikat/BEM-LP3I.png",
+    image: "assets/img/sertifikat/RTIK.jpg",
     badgeColor: "#C83E4E"
   },
   {
+    id: "cert-9",
+    title: "Menteri Komunikasi dan Informatika",
+    issuer: "BEM Politeknik LP3I Kampus Padang",
+    date: "2026",
+    image: "assets/img/BEM-LP3I.webp",
+    badgeColor: "#C83E4E"
+  },
+  {
+    id: "cert-8",
+    title: "Junior Office Operator",
+    issuer: "BNSP",
+    date: "2025",
+    image: "assets/img/sertifikat/juniorOfficeOperator.png",
+    badgeColor: "#E05263"
+  },
+  {
+    id: "cert-7",
+    title: "Konsep Pemrograman",
+    issuer: "Digital Talent Scholarship",
+    date: "2025",
+    image: "",
+    badgeColor: "#E05263"
+  },
+  {
     id: "cert-6",
+    title: "Optimasi Instagram dengan Insight",
+    issuer: "Digital Talent Scholarship",
+    date: "2025",
+    image: "",
+    badgeColor: "#E05263"
+  },
+  // {
+  //   id: "cert-5",
+  //   title: "Kemah Bakti Mahasiswa (KBM)",
+  //   issuer: "Politeknik LP3I Kampus Padang",
+  //   date: "2025",
+  //   image: "assets/img/sertifikat/KBM-LP3I.png",
+  //   badgeColor: "#10B981"
+  // },
+  {
+    id: "cert-4",
+    title: "Olimpiade IT SLTA",
+    issuer: "HMJ-MI UMMY",
+    date: "2024",
+    image: "assets/img/sertifikat/olimpiadeIT.png",
+    badgeColor: "#38BDF8"
+  },
+  // {
+  //   id: "cert-3",
+  //   title: "Pengenalan Kehidupan Kampus (PKKMB)",
+  //   issuer: "Politeknik LP3I Kampus Padang",
+  //   date: "2024",
+  //   image: "assets/img/sertifikat/PKKMB-LP3I.png",
+  //   badgeColor: "#A855F7"
+  // },
+  {
+    id: "cert-2",
+    title: "Raimuna Nasional XII",
+    issuer: "Kwartir Nasional Gerakan Pramuka",
+    date: "2023",
+    image: "assets/img/sertifikat/rainas.png",
+    badgeColor: "#F59E0B"
+  },
+  {
+    id: "cert-1",
     title: "Dialog Kebangsaan & Anti Radikalisme",
     issuer: "Densus 88 AT POLRI & Solok Muda",
     date: "2023",
     image: "assets/img/sertifikat/dialogKebangsaan.png",
     badgeColor: "#F59E0B"
-  },
-  {
-    id: "cert-7",
-    title: "Kemah Bakti Mahasiswa (KBM)",
-    issuer: "Politeknik LP3I Kampus Padang",
-    date: "2025",
-    image: "assets/img/sertifikat/KBM-LP3I.png",
-    badgeColor: "#10B981"
-  },
-  {
-    id: "cert-8",
-    title: "Pengenalan Kehidupan Kampus (PKKMB)",
-    issuer: "Politeknik LP3I Kampus Padang",
-    date: "2024",
-    image: "assets/img/sertifikat/PKKMB-LP3I.png",
-    badgeColor: "#A855F7"
   }
 ];
 

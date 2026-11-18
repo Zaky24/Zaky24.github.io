@@ -1,0 +1,224 @@
+{
+  "profile": {
+    "name": "Ira Zaky Elmar",
+    "shortName": "Ira Zaky",
+    "badgeText": "Ready to Innovate",
+    "roles": [
+      "Web Developer",
+      "Fullstack Developer",
+      "Junior Web Developer"
+    ],
+    "cvUrl": "./My-CV.pdf",
+    "journeyStartYear": 2024,
+    "socials": {
+      "github": "https://github.com/Zaky24",
+      "linkedin": "https://www.linkedin.com/in/ira-zaky-0b6779447?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+      "instagram": "https://www.instagram.com/zaky__24?vrfl=ZjFianVoNjJxeXFo",
+      "whatsapp": "https://wa.me/6289507630763",
+      "email": "irazaky24@gmail.com"
+    },
+    "web3FormsAccessKey": "cebdbc56-0278-4e81-afe3-f4d741e56272"
+  },
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "Portal Informasi BEM",
+      "category": "PHP Native Procedural",
+      "timeline": "2024",
+      "image": "assets/img/project/BEM.jpeg",
+      "description": "Web penyampaian informasi resmi di lingkungan civitas akademika Politeknik LP3I Kampus Padang dan sekitarnya.",
+      "story": "Proyek ini saya buat berawal dari keinginan bahwa organisasi kami aktif dalam kegiatan sosialisasi, keorganisasian, serta memajukan dan meningkatkan SDM mahasiswa bersama Unit Kegiatan Mahasiswa. Website ini dirancang sebagai pusat branding organisasi sekaligus sarana resmi penyampaian informasi.",
+      "sections": [
+        {
+          "title": "Tantangan & Solusi",
+          "content": "Pada saat pengembangan website ini, saya menjadikannya sebagai praktik belajar mandiri hingga berhasil menguasai fondasi pemrograman web, khususnya bahasa PHP dan pengelolaan database MySQL yang difasilitasi hosting kampus. Karena akses server kampus yang ketat, awalnya saya sering berkoordinasi dengan operator IT kampus untuk perbaikan bug. Sebagai solusi, saya melakukan pengujian dan debugging menyeluruh secara lokal sebelum deployment agar sistem berjalan stabil tanpa merepotkan operator IT kampus."
+        }
+      ],
+      "tech": [
+        "PHP",
+        "CSS",
+        "MySQL",
+        "JavaScript"
+      ],
+      "liveUrl": "https://www.bem.plp.ac.id/",
+      "repoUrl": "",
+      "accentColor": "#E05263",
+      "secondaryColor": "#38BDF8"
+    },
+    {
+      "id": "proj-2",
+      "title": "E-Voting BEM LP3I",
+      "category": "Laravel Framework",
+      "timeline": "2025",
+      "image": "assets/img/project/evoting.png",
+      "description": "Sistem E-Voting berbasis web untuk mempermudah serta menghemat waktu dan kertas dalam pemilihan calon Ketua Badan Eksekutif Mahasiswa di Politeknik LP3I Padang.",
+      "story": "Proyek ini berawal dari kebutuhan nyata di lingkungan kampus Politeknik LP3I Padang untuk mempermudah mahasiswa dalam memilih kandidat secara digital, mengingat keterbatasan waktu jika dilakukan secara manual. Selaku Menteri KOMINFO BEM pada saat itu, saya diamanahkan untuk merancang dan menyelesaikan sistem E-Voting ini dalam waktu singkat (± 10 hari).",
+      "sections": [
+        {
+          "title": "Tantangan & Solusi",
+          "content": "Dengan tenggat waktu pengerjaan yang sangat singkat di tengah padatnya jadwal perkuliahan, saya menerapkan manajemen waktu yang ketat serta memodifikasi arsitektur sistem E-Voting berbasis Laravel di internet sesuai kebutuhan pemilihan kampus. Hasilnya, sistem E-Voting ini sukses digunakan secara efisien, transparan, menghemat waktu dan penggunaan kertas."
+        },
+        {
+          "title": "Ucapan Terima Kasih",
+          "content": "Saya mengambil repositori publik dari 'github: https://github.com/Sleepy4k/laravel-voting-osis.git'. Maaf sebelumnya kalau semisalnya saya belum izin, dan saya mengucapkan terimakasih untuk repositori yang Abang publikasikan, sehingga pemilihan calon ketua BEM di kampus saya bisa terlaksanakan dengan aman dan lancar"
+        }
+      ],
+      "features": [
+        "Dashboard CRUD kandidat (visi-misi, foto, dan profil kandidat)",
+        "Dashboard CRUD manajemen data mahasiswa (pemilih tetap)",
+        "Antarmuka kartu pemilihan kandidat yang mudah digunakan",
+        "Dashboard perhitungan suara (real-count) hasil voting",
+        "Validasi hak pilih satu akun satu suara (one vote per student)"
+      ],
+      "tech": [
+        "Laravel",
+        "CSS",
+        "MySQL",
+        "JavaScript"
+      ],
+      "liveUrl": "https://evotingbem.plp.ac.id",
+      "repoUrl": "",
+      "accentColor": "#E05263",
+      "secondaryColor": "#38BDF8"
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert-11",
+      "title": "Cybertech Programming Competition",
+      "issuer": "UKM Cybertech PNP",
+      "date": "2026",
+      "image": "assets/img/sertifikat/cybertechProgramming.png",
+      "badgeColor": "#0284C7"
+    },
+    {
+      "id": "cert-10",
+      "title": "Ketua Umum Relawan TIK Padang",
+      "issuer": "Relawan TIK Padang",
+      "date": "2026",
+      "image": "assets/img/sertifikat/RTIK.jpg",
+      "badgeColor": "#C83E4E"
+    },
+    {
+      "id": "cert-9",
+      "title": "Menteri Komunikasi dan Informatika",
+      "issuer": "BEM Politeknik LP3I Kampus Padang",
+      "date": "2026",
+      "image": "assets/img/BEM-LP3I.webp",
+      "badgeColor": "#C83E4E"
+    },
+    {
+      "id": "cert-8",
+      "title": "Junior Office Operator",
+      "issuer": "BNSP",
+      "date": "2025",
+      "image": "assets/img/sertifikat/juniorOfficeOperator.png",
+      "badgeColor": "#E05263"
+    },
+    {
+      "id": "cert-7",
+      "title": "Konsep Pemrograman",
+      "issuer": "Digital Talent Scholarship",
+      "date": "2025",
+      "image": "",
+      "badgeColor": "#E05263"
+    },
+    {
+      "id": "cert-6",
+      "title": "Optimasi Instagram dengan Insight",
+      "issuer": "Digital Talent Scholarship",
+      "date": "2025",
+      "image": "",
+      "badgeColor": "#E05263"
+    },
+    {
+      "id": "cert-4",
+      "title": "Olimpiade IT SLTA",
+      "issuer": "HMJ-MI UMMY",
+      "date": "2024",
+      "image": "assets/img/sertifikat/olimpiadeIT.png",
+      "badgeColor": "#38BDF8"
+    },
+    {
+      "id": "cert-2",
+      "title": "Raimuna Nasional XII",
+      "issuer": "Kwartir Nasional Gerakan Pramuka",
+      "date": "2023",
+      "image": "assets/img/sertifikat/rainas.png",
+      "badgeColor": "#F59E0B"
+    },
+    {
+      "id": "cert-1",
+      "title": "Dialog Kebangsaan & Anti Radikalisme",
+      "issuer": "Densus 88 AT POLRI & Solok Muda",
+      "date": "2023",
+      "image": "assets/img/sertifikat/dialogKebangsaan.png",
+      "badgeColor": "#F59E0B"
+    }
+  ],
+  "techStack": [
+    {
+      "name": "HTML5",
+      "category": "Frontend",
+      "color": "#E34F26",
+      "code": "HTML",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+    },
+    {
+      "name": "CSS3",
+      "category": "Frontend",
+      "color": "#1572B6",
+      "code": "CSS",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+    },
+    {
+      "name": "JavaScript",
+      "category": "Language",
+      "color": "#F7DF1E",
+      "code": "JS",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+    },
+    {
+      "name": "TypeScript",
+      "category": "Language",
+      "color": "#3178C6",
+      "code": "TS",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+    },
+    {
+      "name": "Tailwind CSS",
+      "category": "Frontend",
+      "color": "#06B6D4",
+      "code": "TW",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+    },
+    {
+      "name": "Node.js",
+      "category": "Backend",
+      "color": "#339933",
+      "code": "NODE",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+    },
+    {
+      "name": "Laravel",
+      "category": "Framework",
+      "color": "#FF2D20",
+      "code": "LRV",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
+    },
+    {
+      "name": "MySQL",
+      "category": "Database",
+      "color": "#4479A1",
+      "code": "SQL",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+    },
+    {
+      "name": "Git & GitHub",
+      "category": "Tools",
+      "color": "#F05032",
+      "code": "GIT",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "ira-zaky-elmar-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Portofolio statis Ira Zaky Elmar — static site untuk GitHub Pages",
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:html && npm run build:css",
+    "build:css": "tailwindcss -i ./assets/css/tailwind.src.css -o ./assets/css/tailwind.css --minify",
+    "build:html": "node ./scripts/build-portfolio.mjs",
+    "watch:css": "tailwindcss -i ./assets/css/tailwind.src.css -o ./assets/css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

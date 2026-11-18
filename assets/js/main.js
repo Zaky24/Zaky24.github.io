@@ -1,14 +1,75 @@
-import {
-  PROFILE_DATA,
-  PROJECTS_DATA,
-  CERTIFICATES_DATA,
-  TECH_STACK_DATA
-} from "./data.js?v=1.5";
-import { initSakuraCanvas } from "./sakura-canvas.js?v=1.5";
+﻿import { initSakuraCanvas } from "./sakura-canvas.js?v=2.0";
+
+/* ==========================================================================
+   DATA SOURCE (assets/data/portfolio.json)
+   Di-generate oleh `npm run build` dari assets/js/data.js.
+   Diambil sekali saja, setelah halaman tampil.
+   ========================================================================== */
+const DATA_URL = "./assets/data/portfolio.json?v=2.0";
+
+/* Nilai cadangan: dipakai sebelum portfolio.json selesai dimuat
+   (mis. saat pengunjung langsung menekan "Send Message").
+   Sumber utama tetap assets/js/data.js → portfolio.json. */
+const FALLBACK_PROFILE = {
+  roles: ["Web Developer", "Fullstack Developer", "Junior Web Developer"],
+  email: "irazaky24@gmail.com",
+  web3FormsAccessKey: "cebdbc56-0278-4e81-afe3-f4d741e56272"
+};
+
+const getProfile = () => (portfolioData ? portfolioData.profile : FALLBACK_PROFILE);
+
+let portfolioData = null;
+let dataRequest = null;
+
+function loadPortfolioData() {
+  if (portfolioData) return Promise.resolve(portfolioData);
+  if (!dataRequest) {
+    dataRequest = fetch(DATA_URL)
+      .then((res) => {
+        if (!res.ok) throw new Error(`Gagal memuat data portofolio (${res.status})`);
+        return res.json();
+      })
+      .then((data) => {
+        portfolioData = data;
+        return data;
+      })
+      .catch((err) => {
+        dataRequest = null;
+        throw err;
+      });
+  }
+  return dataRequest;
+}
+
+/* Lazy observer sementara: callback dipanggil sekali saat elemen mendekati viewport */
+const onceEnter = (el, callback, rootMargin = "400px 0px") => {
+  if (!el) return;
+  if (!("IntersectionObserver" in window)) {
+    callback();
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        observer.disconnect();
+        callback();
+      }
+    },
+    { rootMargin }
+  );
+  observer.observe(el);
+};
 
 /* ==========================================================================
    PROJECT & CERTIFICATE THUMBNAIL GENERATOR (Supports Real Images & Fallback SVG)
    ========================================================================== */
+const escapeHtml = (value = "") =>
+  String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
 function normalizeExternalUrl(url) {
   if (!url || typeof url !== "string") return "";
   const trimmed = url.trim();
@@ -22,16 +83,17 @@ function renderProjectThumbnail(project) {
     return `
       <img
         src="${project.image}"
-        alt="${project.title} Preview"
+        alt="${escapeHtml(project.title)} Preview"
+        width="640" height="360"
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        loading="lazy"
+        loading="lazy" decoding="async"
       />
     `;
   }
 
   const { accentColor, secondaryColor, category, title } = project;
   return `
-    <svg viewBox="0 0 480 250" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" role="img" aria-label="${title} preview">
+    <svg viewBox="0 0 480 250" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" role="img" aria-label="${escapeHtml(title)} preview">
       <rect width="480" height="250" fill="#0B1120" />
       <g fill="${secondaryColor}" fill-opacity="0.12">
         <rect x="24" y="24" width="3" height="3" />
@@ -74,15 +136,16 @@ function renderCertificateThumbnail(cert) {
     return `
       <img
         src="${cert.image}"
-        alt="${cert.title}"
+        alt="${escapeHtml(cert.title)}"
+        width="640" height="420"
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        loading="lazy"
+        loading="lazy" decoding="async"
       />
     `;
   }
 
   return `
-    <svg viewBox="0 0 420 240" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" role="img" aria-label="${cert.title}">
+    <svg viewBox="0 0 420 240" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" role="img" aria-label="${escapeHtml(cert.title)}">
       <rect width="420" height="240" fill="#0D1424" />
       <rect x="18" y="18" width="384" height="204" rx="8" fill="#111A2E" stroke="${cert.badgeColor}" stroke-opacity="0.5" stroke-width="1.5" />
       <rect x="28" y="28" width="364" height="184" rx="4" fill="none" stroke="#94A3B8" stroke-opacity="0.15" stroke-dasharray="4 4" />
@@ -91,7 +154,7 @@ function renderCertificateThumbnail(cert) {
       <rect x="135" y="116" width="150" height="8" rx="4" fill="#F8FAFC" fill-opacity="0.9" />
       <rect x="95" y="134" width="230" height="6" rx="3" fill="#94A3B8" fill-opacity="0.5" />
       <rect x="145" y="152" width="130" height="6" rx="3" fill="${cert.badgeColor}" fill-opacity="0.8" />
-      <text x="210" y="188" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">${cert.issuer} · ${cert.date}</text>
+      <text x="210" y="188" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">${escapeHtml(cert.issuer)} · ${escapeHtml(cert.date)}</text>
     </svg>
   `;
 }
@@ -125,13 +188,13 @@ function initInteractiveCursorAndTilt() {
 }
 
 /* ==========================================================================
-   TYPEWRITER ENGINE ("Software Engineer", "Web Developer", "Fullstack Developer")
+   TYPEWRITER ENGINE ("Web Developer", "Fullstack Developer", "Junior Web Developer")
    ========================================================================== */
 function initTypewriter() {
   const el = document.getElementById("typewriter-role");
   if (!el) return;
 
-  const roles = PROFILE_DATA.roles;
+  const roles = getProfile().roles || FALLBACK_PROFILE.roles;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     el.textContent = roles[0];
     return;
@@ -166,154 +229,215 @@ function initTypewriter() {
 
   tick();
 }
+/* ==========================================================================
+   PORTFOLIO SHOWCASE — PAGINATION (data sudah ter-render di HTML)
+   ========================================================================== */
+function activateShowcaseTab(targetPanelId) {
+  document.querySelectorAll(".showcase-tab-btn").forEach((tab) => {
+    tab.setAttribute("aria-selected", String(tab.getAttribute("aria-controls") === targetPanelId));
+  });
+  document.querySelectorAll(".showcase-panel").forEach((panel) => {
+    panel.classList.toggle("hidden", panel.id !== targetPanelId);
+  });
+}
+
+const SHOWCASE_PANELS = {
+  projects: {
+    gridId: "projects-grid",
+    paginationId: "projects-pagination",
+    pageSize: { mobile: 2, desktop: 3 }
+  },
+  certificates: {
+    gridId: "certificates-grid",
+    paginationId: "certificates-pagination",
+    pageSize: { mobile: 3, desktop: 6 }
+  }
+};
+
+const showcaseState = {
+  projects: { page: 1, totalPages: 1, pageSize: 3 },
+  certificates: { page: 1, totalPages: 1, pageSize: 3 }
+};
+
+function currentPageSize(panel) {
+  const size = SHOWCASE_PANELS[panel].pageSize;
+  return window.innerWidth >= 768 ? size.desktop : size.mobile;
+}
+
+function renderPaginationBar(panel) {
+  const config = SHOWCASE_PANELS[panel];
+  const nav = document.getElementById(config.paginationId);
+  const grid = document.getElementById(config.gridId);
+  if (!nav || !grid) return;
+
+  const state = showcaseState[panel];
+  const cards = grid.querySelectorAll(":scope > article");
+  const total = cards.length;
+
+  state.pageSize = currentPageSize(panel);
+  state.totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+  state.page = Math.min(Math.max(1, state.page), state.totalPages);
+
+  const from = total === 0 ? 0 : (state.page - 1) * state.pageSize + 1;
+  const to = Math.min(total, state.page * state.pageSize);
+
+  cards.forEach((card, index) => {
+    const visible = index >= from - 1 && index < to;
+    card.classList.toggle("showcase-card-hidden", !visible);
+  });
+
+  if (state.totalPages <= 1) {
+    nav.innerHTML = "";
+    nav.hidden = true;
+    return;
+  }
+
+  nav.hidden = false;
+
+  const pageButtons = Array.from({ length: state.totalPages }, (_, i) => i + 1)
+    .map(
+      (page) => `
+      <button type="button" class="pagination-btn" data-page="${page}"
+        aria-label="Halaman ${page}" ${page === state.page ? 'aria-current="page"' : ""}>
+        ${page}
+      </button>`
+    )
+    .join("");
+
+  nav.innerHTML = `
+    <button type="button" class="pagination-btn" data-page="${state.page - 1}"
+      aria-label="Halaman sebelumnya" ${state.page === 1 ? "disabled" : ""}>&lsaquo;</button>
+    ${pageButtons}
+    <button type="button" class="pagination-btn" data-page="${state.page + 1}"
+      aria-label="Halaman berikutnya" ${state.page === state.totalPages ? "disabled" : ""}>&rsaquo;</button>
+    <p class="pagination-status" aria-live="polite" data-pagination-status>
+      Menampilkan ${from}&ndash;${to} dari ${total}
+    </p>`;
+}
+
+function goToPage(panel, page, { scroll = true, updateHash = true } = {}) {
+  const state = showcaseState[panel];
+  if (!state) return;
+
+  const next = Math.min(Math.max(1, page), state.totalPages);
+  const changed = next !== state.page;
+  state.page = next;
+  renderPaginationBar(panel);
+
+  if (changed && scroll) {
+    const grid = document.getElementById(SHOWCASE_PANELS[panel].gridId);
+    if (grid) {
+      const top = grid.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }
+
+  if (updateHash) {
+    const newHash = `#portfolio/${panel}/${next}`;
+    if (window.location.hash !== newHash) {
+      history.replaceState(null, "", newHash);
+    }
+  }
+}
+
+function initShowcasePagination() {
+  Object.keys(SHOWCASE_PANELS).forEach((panel) => {
+    renderPaginationBar(panel);
+
+    const config = SHOWCASE_PANELS[panel];
+    const nav = document.getElementById(config.paginationId);
+    if (!nav) return;
+
+    nav.addEventListener("click", (event) => {
+      const btn = event.target.closest("[data-page]");
+      if (!btn || btn.disabled) return;
+      goToPage(panel, Number(btn.getAttribute("data-page")));
+    });
+  });
+
+  // Pulihkan halaman dari hash (mis. tautan yang dibagikan: #portfolio/certificates/2)
+  const hashMatch = window.location.hash.match(/^#portfolio\/(projects|certificates)\/(\d+)$/);
+  if (hashMatch) {
+    const [, panel, page] = hashMatch;
+    showcaseState[panel].page = Number(page) || 1;
+    renderPaginationBar(panel);
+    activateShowcaseTab(panel === "projects" ? "panel-projects" : "panel-certificates");
+  }
+
+  // Ukuran halaman berubah antara mobile & desktop
+  let resizeTimer = null;
+  window.addEventListener(
+    "resize",
+    () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        Object.keys(SHOWCASE_PANELS).forEach((panel) => renderPaginationBar(panel));
+      }, 180);
+    },
+    { passive: true }
+  );
+}
+
+/* Data portofolio baru diambil saat section Portfolio mendekati viewport */
+function initLazyPortfolioData() {
+  const portfolioSection = document.getElementById("portfolio");
+  onceEnter(
+    portfolioSection,
+    () => {
+      loadPortfolioData()
+        .then(() => renderSummaryStats())
+        .catch(() => {
+          /* Kartu sudah ada di HTML; data hanya dibutuhkan untuk modal. */
+        });
+    },
+    "600px 0px"
+  );
+}
 
 /* ==========================================================================
-   RENDER PORTFOLIO SHOWCASE (PROJECTS, CERTIFICATES, TECH STACK)
+   DETAIL PROYEK & SERTIFIKAT (delegation, kartu sudah ada di HTML)
    ========================================================================== */
-function renderPortfolioShowcase() {
+async function findProjectById(id) {
+  const data = await loadPortfolioData();
+  return data.projects.find((project) => project.id === id);
+}
+
+async function findCertificateById(id) {
+  const data = await loadPortfolioData();
+  return data.certificates.find((cert) => cert.id === id);
+}
+
+function initShowcaseInteractions() {
   const projectsGrid = document.getElementById("projects-grid");
-  const certificatesGrid = document.getElementById("certificates-grid");
-  const techStackGrid = document.getElementById("techstack-grid");
-
   if (projectsGrid) {
-    projectsGrid.innerHTML = PROJECTS_DATA.map(
-      (proj) => `
-      <article class="surface-card surface-card-interactive flex flex-col justify-between group overflow-hidden">
-        <div>
-          <div class="relative h-48 -mx-7 -mt-7 mb-5 overflow-hidden border-b border-[var(--border-subtle)] bg-[#0B1120]">
-            ${renderProjectThumbnail(proj)}
-          </div>
+    projectsGrid.addEventListener("click", async (event) => {
+      const btn = event.target.closest(".project-detail-btn");
+      if (!btn) return;
+      event.preventDefault();
 
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="tabular-nums-data text-xs font-semibold text-[var(--accent-secondary)]">
-              ${proj.category}
-            </span>
-            <span class="tabular-nums-data text-xs text-[var(--text-muted)]">
-              ${proj.timeline}
-            </span>
-          </div>
-
-          <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">${proj.title}</h3>
-          <p class="text-sm text-[var(--text-secondary)] mb-5 leading-relaxed">${proj.description}</p>
-        </div>
-
-        <div class="space-y-4 pt-3 border-t border-[var(--border-subtle)]">
-          ${Array.isArray(proj.tech) && proj.tech.length > 0 ? `
-          <div class="flex flex-wrap gap-1.5">
-            ${proj.tech
-              .map(
-                (t) =>
-                  `<span class="tabular-nums-data text-xs px-2.5 py-1 rounded-md bg-[var(--bg-pill)] text-[var(--text-secondary)]">${t}</span>`
-              )
-              .join("")}
-          </div>
-          ` : ""}
-
-          <div class="flex items-center justify-between gap-3 pt-1">
-            ${proj.liveUrl && proj.liveUrl.trim() !== "" ? `
-            <a
-              href="${normalizeExternalUrl(proj.liveUrl)}"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent-secondary)] hover:underline"
-            >
-              <span>Live Demo</span>
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-            </a>
-            ` : `<span class="text-xs text-[var(--text-muted)] tabular-nums-data">Portfolio Showcase</span>`}
-
-            <button
-              type="button"
-              data-project-id="${proj.id}"
-              class="project-detail-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--accent-primary)] text-[var(--accent-on-primary)] text-xs font-bold cursor-pointer transition-transform hover:-translate-y-0.5 ml-auto"
-            >
-              <span>Details</span>
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </article>
-    `
-    ).join("");
-
-    projectsGrid.querySelectorAll(".project-detail-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-project-id");
-        const proj = PROJECTS_DATA.find((p) => p.id === id);
-        if (proj) openProjectDetailModal(proj);
-      });
+      try {
+        const project = await findProjectById(btn.getAttribute("data-project-id"));
+        if (project) openProjectDetailModal(project);
+      } catch (error) {
+        console.warn("Detail proyek tidak dapat dimuat:", error);
+      }
     });
   }
 
-  // Certificates Grid (Tanpa tombol/link verifikasi sesuai permintaan user)
+  const certificatesGrid = document.getElementById("certificates-grid");
   if (certificatesGrid) {
-    certificatesGrid.innerHTML = CERTIFICATES_DATA.map(
-      (cert) => `
-      <article class="surface-card surface-card-interactive flex flex-col justify-between group overflow-hidden">
-        <div>
-          <div class="relative h-44 -mx-7 -mt-7 mb-5 overflow-hidden border-b border-[var(--border-subtle)] bg-[#0D1424]">
-            ${renderCertificateThumbnail(cert)}
-          </div>
-          <span class="tabular-nums-data text-xs text-[var(--accent-primary)] font-semibold block mb-1">
-            ${cert.issuer} · ${cert.date}
-          </span>
-          <h3 class="text-lg font-bold text-[var(--text-primary)] mb-3">${cert.title}</h3>
-        </div>
+    certificatesGrid.addEventListener("click", async (event) => {
+      const btn = event.target.closest(".cert-preview-btn");
+      if (!btn) return;
+      event.preventDefault();
 
-        <div class="pt-3 border-t border-[var(--border-subtle)] flex items-center justify-start">
-          <button
-            type="button"
-            data-cert-id="${cert.id}"
-            class="cert-preview-btn inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-secondary)] hover:underline cursor-pointer"
-          >
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <span>Lihat Sertifikat</span>
-          </button>
-        </div>
-      </article>
-    `
-    ).join("");
-
-    certificatesGrid.querySelectorAll(".cert-preview-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-cert-id");
-        const cert = CERTIFICATES_DATA.find((c) => c.id === id);
+      try {
+        const cert = await findCertificateById(btn.getAttribute("data-cert-id"));
         if (cert) openCertModal(cert);
-      });
+      } catch (error) {
+        console.warn("Detail sertifikat tidak dapat dimuat:", error);
+      }
     });
-  }
-
-  // Tech Stack Grid (Supports custom logo image icon or stylized code badge)
-  if (techStackGrid) {
-    techStackGrid.innerHTML = TECH_STACK_DATA.map(
-      (item) => `
-      <div class="surface-card surface-card-interactive flex flex-col items-center justify-center text-center p-5 gap-3 group">
-        <div
-          class="w-14 h-14 rounded-2xl flex items-center justify-center p-2.5 transition-transform group-hover:scale-110"
-          style="background-color: ${item.color}18; color: ${item.color};"
-        >
-          ${item.icon && item.icon.trim() !== ""
-            ? `<img src="${item.icon}" alt="${item.name} icon" class="w-8 h-8 object-contain" loading="lazy" />`
-            : `<span class="font-pixel-accent text-sm font-bold">${item.code}</span>`
-          }
-        </div>
-        <div>
-          <h3 class="text-base font-bold text-[var(--text-primary)] mb-0.5">${item.name}</h3>
-          <span class="tabular-nums-data text-xs text-[var(--text-muted)]">${item.category}</span>
-        </div>
-      </div>
-    `
-    ).join("");
   }
 }
 
@@ -321,16 +445,18 @@ function renderPortfolioShowcase() {
    RENDER SUMMARY STATS (PROJECTS COUNT, CERTIFICATES COUNT, YEARS IN IT)
    ========================================================================== */
 function renderSummaryStats() {
-  const stats = PROFILE_DATA.stats;
-  if (!stats) return;
+  if (!portfolioData) return;
+
+  const startYear = portfolioData.profile.journeyStartYear || 2024;
+  const yearsDiff = Math.max(1, new Date().getFullYear() - startYear);
 
   const projectsCountEl = document.getElementById("stat-projects-count");
   const certsCountEl = document.getElementById("stat-certificates-count");
   const yearsLearningEl = document.getElementById("stat-years-learning");
 
-  if (projectsCountEl) projectsCountEl.textContent = stats.projectsCount;
-  if (certsCountEl) certsCountEl.textContent = stats.certificatesCount;
-  if (yearsLearningEl) yearsLearningEl.textContent = stats.yearsLearning;
+  if (projectsCountEl) projectsCountEl.textContent = portfolioData.projects.length;
+  if (certsCountEl) certsCountEl.textContent = portfolioData.certificates.length;
+  if (yearsLearningEl) yearsLearningEl.textContent = `${yearsDiff}+`;
 }
 
 /* ==========================================================================
@@ -527,8 +653,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const sakuraBg = initSakuraCanvas("sakura-canvas");
   initInteractiveCursorAndTilt();
   initTypewriter();
-  renderPortfolioShowcase();
-  renderSummaryStats();
+  initShowcasePagination();
+  initShowcaseInteractions();
+  initLazyPortfolioData();
 
   // Theme Toggle (Dark / Light)
   const themeBtn = document.getElementById("theme-toggle-btn");
@@ -575,16 +702,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Portfolio Showcase 3-Tab Switcher
   const tabs = document.querySelectorAll(".showcase-tab-btn");
-  const panels = document.querySelectorAll(".showcase-panel");
 
   function activateTab(targetPanelId) {
-    tabs.forEach((t) => {
-      const controls = t.getAttribute("aria-controls");
-      t.setAttribute("aria-selected", String(controls === targetPanelId));
-    });
-    panels.forEach((p) => {
-      p.classList.toggle("hidden", p.id !== targetPanelId);
-    });
+    activateShowcaseTab(targetPanelId);
   }
 
   tabs.forEach((tab) => {
@@ -652,8 +772,9 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("irazaky-inbox", JSON.stringify(savedMessages));
 
       // Jika ada Access Key Web3Forms
-      if (PROFILE_DATA.web3FormsAccessKey && PROFILE_DATA.web3FormsAccessKey.trim() !== "") {
-        formData.append("access_key", PROFILE_DATA.web3FormsAccessKey.trim());
+      const accessKey = getProfile().web3FormsAccessKey || "";
+      if (accessKey && accessKey.trim() !== "") {
+        formData.append("access_key", accessKey.trim());
         formData.append("subject", `[Portofolio] Pesan Baru dari ${name}`);
         formData.append("from_name", "Ira Zaky Elmar Portfolio");
         formData.append("replyto", email);
@@ -686,7 +807,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         } catch (err) {
           contactStatus.className = "p-3.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--accent-primary)] text-xs font-semibold text-[var(--accent-primary)] block";
-          contactStatus.textContent = `Maaf, pesan gagal terkirim: ${err.message || "Koneksi terganggu"}. Silakan hubungi langsung ke WhatsApp atau email ${PROFILE_DATA.socials.email}.`;
+          contactStatus.textContent = `Maaf, pesan gagal terkirim: ${err.message || "Koneksi terganggu"}. Silakan hubungi langsung ke WhatsApp atau email ${getProfile().email || FALLBACK_PROFILE.email}.`;
           return;
         } finally {
           if (submitBtn) {
@@ -697,12 +818,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Fallback jika belum memasukkan Access Key Web3Forms: buka mailto
+      const fallbackEmail = (getProfile().socials && getProfile().socials.email) || FALLBACK_PROFILE.email;
       const subject = encodeURIComponent(`Pesan Portofolio dari ${name}`);
       const body = encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`);
-      window.location.href = `mailto:${PROFILE_DATA.socials.email}?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:${fallbackEmail}?subject=${subject}&body=${body}`;
 
       contactStatus.className = "p-3.5 rounded-xl bg-[var(--bg-pill)] border border-[var(--accent-emerald)] text-xs font-semibold text-[var(--accent-emerald)] block";
-      contactStatus.textContent = `Terima kasih ${name}! Aplikasi email dibuka untuk mengirim pesan langsung ke ${PROFILE_DATA.socials.email}.`;
+      contactStatus.textContent = `Terima kasih ${name}! Aplikasi email dibuka untuk mengirim pesan langsung ke ${fallbackEmail}.`;
       contactForm.reset();
     });
   }

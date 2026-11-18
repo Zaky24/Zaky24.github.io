@@ -8,3 +8,8 @@ SEO_AI_TEST_SCENARIOS.md
 /.agent
 /.agents
 /.impeccable
+node_modules/
+
+# OS / editor
+Thumbs.db
+.DS_Store

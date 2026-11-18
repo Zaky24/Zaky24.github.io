@@ -260,9 +260,51 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
 
   function loop() {
     if (reducedMotionQuery.matches) return;
+    if (isIdle) return;
     renderFrame();
     animationFrameId = requestAnimationFrame(loop);
   }
+
+  /* Hemat CPU di HP: hentikan loop saat tab tidak terlihat,
+     saat halaman tidak di-scroll sama sekali, atau saat pengguna
+     sudah scroll jauh dari hero (canvas hanya berguna di hero). */
+  let isIdle = false;
+  let idleFrame = null;
+
+  function setActive(active) {
+    if (active === !isIdle) return;
+    isIdle = !active;
+
+    if (active) {
+      if (reducedMotionQuery.matches) {
+        renderFrame();
+        return;
+      }
+      if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(loop);
+    } else if (animationFrameId !== null) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
+  }
+
+  function isCanvasInView() {
+    return window.scrollY < window.innerHeight * 1.2;
+  }
+
+  function onVisibilityChange() {
+    setActive(!document.hidden && isCanvasInView());
+  }
+
+  let scrollSettle = null;
+  function onScroll() {
+    resetPointer();
+    if (reducedMotionQuery.matches) return;
+    setActive(!document.hidden && isCanvasInView());
+  }
+
+  document.addEventListener("visibilitychange", onVisibilityChange);
+  window.addEventListener("pagehide", () => setActive(false));
 
   function resetPointer() {
     pointer.x = -9999;
@@ -274,7 +316,7 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
   }
 
   window.addEventListener("resize", resize, { passive: true });
-  window.addEventListener("scroll", resetPointer, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("pointerleave", resetPointer, { passive: true });
   window.addEventListener("pointerup", resetPointer, { passive: true });
   window.addEventListener("pointercancel", resetPointer, { passive: true });
