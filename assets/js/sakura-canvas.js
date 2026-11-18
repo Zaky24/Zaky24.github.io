@@ -258,18 +258,31 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
     pointer.vy *= 0.82;
   }
 
-  function loop() {
+  /* Layar sentuh (HP) cukup ~30fps: gerakan kelopak lambat, jadi tidak
+     terlihat bedanya, tapi beban CPU/GPU turun hampir separuh. */
+  const targetFrameMs = window.matchMedia("(pointer: coarse)").matches ? 1000 / 30 : 0;
+  let lastFrameTime = 0;
+
+  function loop(timestamp = 0) {
     if (reducedMotionQuery.matches) return;
     if (isIdle) return;
-    renderFrame();
+
+    if (targetFrameMs > 0) {
+      if (timestamp - lastFrameTime >= targetFrameMs) {
+        lastFrameTime = timestamp;
+        renderFrame();
+      }
+    } else {
+      renderFrame();
+    }
+
     animationFrameId = requestAnimationFrame(loop);
   }
 
-  /* Hemat CPU di HP: hentikan loop saat tab tidak terlihat,
-     saat halaman tidak di-scroll sama sekali, atau saat pengguna
-     sudah scroll jauh dari hero (canvas hanya berguna di hero). */
+  /* Hemat CPU: hanya berhenti saat tab benar-benar tidak terlihat
+     (browser sudah membekukan rAF-nya sendiri, ini sekadar jaga-jaga).
+     Animasi TETAP berjalan di seluruh halaman — termasuk saat scroll. */
   let isIdle = false;
-  let idleFrame = null;
 
   function setActive(active) {
     if (active === !isIdle) return;
@@ -288,19 +301,12 @@ export function initSakuraCanvas(canvasId = "sakura-canvas") {
     }
   }
 
-  function isCanvasInView() {
-    return window.scrollY < window.innerHeight * 1.2;
-  }
-
   function onVisibilityChange() {
-    setActive(!document.hidden && isCanvasInView());
+    setActive(!document.hidden);
   }
 
-  let scrollSettle = null;
   function onScroll() {
     resetPointer();
-    if (reducedMotionQuery.matches) return;
-    setActive(!document.hidden && isCanvasInView());
   }
 
   document.addEventListener("visibilitychange", onVisibilityChange);

@@ -127,7 +127,7 @@ export const CERTIFICATES_DATA = [
     title: "Cybertech Programming Competition",
     issuer: "UKM Cybertech PNP",
     date: "2026",
-    image: "assets/img/sertifikat/cybertechProgramming.png",
+    image: "assets/img/sertifikat/cybertechProgramming.webp",
     badgeColor: "#0284C7"
   },
   {
@@ -135,7 +135,7 @@ export const CERTIFICATES_DATA = [
     title: "Ketua Umum Relawan TIK Padang",
     issuer: "Relawan TIK Padang",
     date: "2026",
-    image: "assets/img/sertifikat/RTIK.jpg",
+    image: "assets/img/sertifikat/RTIK.webp",
     badgeColor: "#C83E4E"
   },
   {
@@ -143,7 +143,7 @@ export const CERTIFICATES_DATA = [
     title: "Menteri Komunikasi dan Informatika",
     issuer: "BEM Politeknik LP3I Kampus Padang",
     date: "2026",
-    image: "assets/img/BEM-LP3I.webp",
+    image: "assets/img/sertifikat/BEM-LP3I.webp",
     badgeColor: "#C83E4E"
   },
   {
@@ -151,7 +151,7 @@ export const CERTIFICATES_DATA = [
     title: "Junior Office Operator",
     issuer: "BNSP",
     date: "2025",
-    image: "assets/img/sertifikat/juniorOfficeOperator.png",
+    image: "assets/img/sertifikat/juniorOfficeOperator.webp",
     badgeColor: "#E05263"
   },
   {
@@ -159,7 +159,7 @@ export const CERTIFICATES_DATA = [
     title: "Konsep Pemrograman",
     issuer: "Digital Talent Scholarship",
     date: "2025",
-    image: "",
+    image: "assets/img/sertifikat/pemrograman.webp",
     badgeColor: "#E05263"
   },
   {
@@ -167,7 +167,7 @@ export const CERTIFICATES_DATA = [
     title: "Optimasi Instagram dengan Insight",
     issuer: "Digital Talent Scholarship",
     date: "2025",
-    image: "",
+    image: "assets/img/sertifikat/optimasiSosmed.webp",
     badgeColor: "#E05263"
   },
   // {
@@ -175,7 +175,7 @@ export const CERTIFICATES_DATA = [
   //   title: "Kemah Bakti Mahasiswa (KBM)",
   //   issuer: "Politeknik LP3I Kampus Padang",
   //   date: "2025",
-  //   image: "assets/img/sertifikat/KBM-LP3I.png",
+  //   image: "assets/img/sertifikat/KBM-LP3I.webp",
   //   badgeColor: "#10B981"
   // },
   {
@@ -183,7 +183,7 @@ export const CERTIFICATES_DATA = [
     title: "Olimpiade IT SLTA",
     issuer: "HMJ-MI UMMY",
     date: "2024",
-    image: "assets/img/sertifikat/olimpiadeIT.png",
+    image: "assets/img/sertifikat/olimpiadeIT.webp",
     badgeColor: "#38BDF8"
   },
   // {
@@ -191,7 +191,7 @@ export const CERTIFICATES_DATA = [
   //   title: "Pengenalan Kehidupan Kampus (PKKMB)",
   //   issuer: "Politeknik LP3I Kampus Padang",
   //   date: "2024",
-  //   image: "assets/img/sertifikat/PKKMB-LP3I.png",
+  //   image: "assets/img/sertifikat/PKKMB-LP3I.webp",
   //   badgeColor: "#A855F7"
   // },
   {
@@ -199,7 +199,7 @@ export const CERTIFICATES_DATA = [
     title: "Raimuna Nasional XII",
     issuer: "Kwartir Nasional Gerakan Pramuka",
     date: "2023",
-    image: "assets/img/sertifikat/rainas.png",
+    image: "assets/img/sertifikat/rainas.webp",
     badgeColor: "#F59E0B"
   },
   {
@@ -207,7 +207,7 @@ export const CERTIFICATES_DATA = [
     title: "Dialog Kebangsaan & Anti Radikalisme",
     issuer: "Densus 88 AT POLRI & Solok Muda",
     date: "2023",
-    image: "assets/img/sertifikat/dialogKebangsaan.png",
+    image: "assets/img/sertifikat/dialogKebangsaan.webp",
     badgeColor: "#F59E0B"
   }
 ];

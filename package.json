@@ -8,6 +8,7 @@
     "build": "npm run build:html && npm run build:css",
     "build:css": "tailwindcss -i ./assets/css/tailwind.src.css -o ./assets/css/tailwind.css --minify",
     "build:html": "node ./scripts/build-portfolio.mjs",
+    "dev": "http-server . -p 8765 -c-1",
     "watch:css": "tailwindcss -i ./assets/css/tailwind.src.css -o ./assets/css/tailwind.css --watch"
   },
   "devDependencies": {
